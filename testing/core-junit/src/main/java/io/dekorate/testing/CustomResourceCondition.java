@@ -15,9 +15,9 @@
  */
 package io.dekorate.testing;
 
-import io.dekorate.deps.kubernetes.client.Config;
-import io.dekorate.deps.kubernetes.client.KubernetesClient;
-import io.dekorate.deps.kubernetes.client.utils.URLUtils;
+import io.fabric8.kubernetes.client.Config;
+import io.fabric8.kubernetes.client.KubernetesClient;
+import io.fabric8.kubernetes.client.utils.URLUtils;
 import io.dekorate.deps.okhttp3.OkHttpClient;
 import io.dekorate.deps.okhttp3.Request;
 import io.dekorate.deps.okhttp3.Response;

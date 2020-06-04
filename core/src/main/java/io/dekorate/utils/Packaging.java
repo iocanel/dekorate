@@ -15,10 +15,6 @@
  */
 package io.dekorate.utils;
 
-import io.dekorate.DekorateException;
-import io.dekorate.deps.commons.compress.archivers.tar.TarArchiveEntry;
-import io.dekorate.deps.commons.compress.archivers.tar.TarArchiveOutputStream;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,6 +30,11 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveOutputStream;
+
+import io.dekorate.DekorateException;
 
 public class Packaging {
 

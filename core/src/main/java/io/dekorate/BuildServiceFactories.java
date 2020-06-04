@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import io.dekorate.config.ConfigurationSupplier;
-import io.dekorate.deps.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.dekorate.kubernetes.config.ImageConfiguration;
 import io.dekorate.project.Project;
 

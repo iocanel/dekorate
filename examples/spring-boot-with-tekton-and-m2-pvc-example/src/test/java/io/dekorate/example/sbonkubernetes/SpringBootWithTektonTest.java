@@ -15,8 +15,8 @@
  */
 package io.dekorate.example.sbonkubernetes;
 
-import io.dekorate.deps.kubernetes.api.model.HasMetadata;
-import io.dekorate.deps.kubernetes.api.model.KubernetesList;
+import io.fabric8.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.dekorate.deps.tekton.pipeline.v1beta1.Pipeline;
 import io.dekorate.deps.tekton.pipeline.v1beta1.PipelineRun;
 import io.dekorate.deps.tekton.pipeline.v1beta1.PipelineTask;

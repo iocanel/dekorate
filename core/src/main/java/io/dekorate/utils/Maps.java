@@ -15,11 +15,10 @@
  */
 package io.dekorate.utils;
 
-import io.dekorate.DekorateException;
-import io.dekorate.deps.jackson.core.type.TypeReference;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,6 +28,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import io.dekorate.DekorateException;
 
 public class Maps {
   private static final String PROPERTY_PREFIX = "dekorate";
@@ -81,6 +84,7 @@ public class Maps {
     return result;
  
   }
+
  
   /**
    * Read a properties input stream and crate a configuration map.
@@ -117,6 +121,41 @@ public class Maps {
         Map<String, Object> kv = asMap(new String[]{String.valueOf(entry.getKey())}, entry.getValue());
         merge(result, kv);
       }
+    }
+    return result;
+  }
+
+  public static <A extends Annotation> Map<String, Object> fromAnnotation(String root, A annotation, Class<? extends A> type) {
+    Map<String, Object> result = new HashMap<>();
+    result.put(root, fromAnnotation(annotation, type));
+    return result;
+  }
+
+  public static <A extends Annotation> Map<String, Object> fromAnnotation(A annotation, Class<? extends A> type) {
+    Map<String, Object> result = new HashMap<>();
+    System.out.println("Converting "+ annotation.getClass().getName() + " to map!");
+    try {
+      for (Method m : type.getDeclaredMethods()) {
+        System.out.println("Found field:"+m.getName());
+        Object value = m.invoke(annotation);
+        if (m.getReturnType().isPrimitive() || m.getReturnType().isEnum()) {
+
+          System.out.println("Add primitive/enum value with key:" + m.getName() + " and value:"+value);
+          result.put(m.getName(), m.invoke(annotation));
+        } else if (m.getReturnType().isAnnotation()) {
+          if (value instanceof Object[]) {
+            List<Map<String, Object>> maps = new ArrayList<>();
+            for (Object o : (Object[])value) {
+              Map<String, Object> nested = fromAnnotation((Annotation)o, (Class) m.getReturnType());
+              maps.add(nested);
+            }
+            result.put(m.getName(), maps.toArray(new Map[maps.size()]));
+          }
+          result.put(m.getName(), fromAnnotation((Annotation) value, (Class) m.getReturnType()));
+        }
+      }
+    } catch (Exception e)  {
+      throw DekorateException.launderThrowable(e);
     }
     return result;
   }

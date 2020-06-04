@@ -15,7 +15,6 @@
  */
 package io.dekorate;
 
-import java.lang.annotation.Annotation;
 import java.util.Map;
 
 import javax.lang.model.element.Element;
@@ -35,8 +34,16 @@ public interface SessionHandler extends WithSession {
    * Add a {@link Map} to the generator.
    * @param map The map.
    */
-  default void add(Map map) {
+  default void addAnnotationConfiguration(Map map) {
   }
+
+  /**
+   * Add a {@link Map} to the generator.
+   * @param map The map.
+   */
+  default void addPropertyConfiguration(Map map) {
+  }
+
 
   /**
    * Get the annotation properties {@link Map} that matches, to the specified {@link Configuration} type.

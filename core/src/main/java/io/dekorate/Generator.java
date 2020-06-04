@@ -44,9 +44,14 @@ public interface Generator extends SessionHandler {
   }
   
   /**
-   * Add a map as the generator input.
+   * Add a map containing property config as the generator input.
    */
-  void add(Map map);
+  void addPropertyConfiguration(Map map);
+
+  /**
+   * Add a map containing annotation config as the generator input.
+   */
+  void addAnnotationConfiguration(Map map);
 
   /**
    * Generate the resources. This method may be called multiple times, but should

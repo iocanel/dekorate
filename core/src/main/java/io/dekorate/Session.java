@@ -18,17 +18,15 @@ package io.dekorate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
-import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import io.dekorate.config.ConfigurationSupplier;
-import io.dekorate.deps.kubernetes.api.model.KubernetesList;
+import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.dekorate.kubernetes.config.ApplicationConfiguration;
 import io.dekorate.kubernetes.config.Configuration;
 import io.dekorate.utils.Generators;
@@ -106,7 +104,7 @@ public class Session {
     GeneratorRegistry.getGenerators().stream().filter(g -> g.getKey() != null && g.getConfigType() != null).forEach(g -> this.configtypes.put(g.getKey(), g.getConfigType()));
   }
 
-  public void feed(Map<String, Object> map) {
+  public void addPropertyConfiguration(Map<String, Object> map) {
     for (Map.Entry<String, Object> entry : map.entrySet()) {
       String key = entry.getKey();
       Object value = entry.getValue();
@@ -121,10 +119,33 @@ public class Session {
         String newKey = configClass.getName();
         Generators.populateArrays(configClass, (Map<String, Object>) value);
         generatorMap.put(newKey, value);
-        generator.add(Maps.kebabToCamelCase(generatorMap));
+        generator.addPropertyConfiguration(Maps.kebabToCamelCase(generatorMap));
       }
     }
   }
+
+  public void addAnnotationConfiguration(Map<String, Object> map) {
+    for (Map.Entry<String, Object> entry : map.entrySet()) {
+      String key = entry.getKey();
+      Object value = entry.getValue();
+      Generator generator = generators.get(key);
+      System.out.println("Annotation configuration key:" + key);
+      if (generator == null) {
+        throw new IllegalArgumentException("Unknown generator '" + key + "'. Known generators are: " + generators.keySet());
+      }
+
+      if (value instanceof Map) {
+        Map<String, Object> generatorMap = new HashMap<>();
+        Class configClass = configtypes.get(key);
+        String newKey = configClass.getName();
+        Generators.populateArrays(configClass, (Map<String, Object>) value);
+        generatorMap.put(newKey, value);
+        generator.addAnnotationConfiguration(Maps.kebabToCamelCase(generatorMap));
+      }
+    }
+  }
+
+
 
   private Map<String, Object> filter(Map<String, Object> properties) {
     Map<String, Object> result = new HashMap<>();

@@ -16,8 +16,8 @@
 
 package io.dekorate.examples.kubernetes;
 
-import io.dekorate.deps.kubernetes.api.model.HasMetadata;
-import io.dekorate.deps.kubernetes.api.model.KubernetesList;
+import io.fabric8.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.dekorate.deps.openshift.api.model.*;
 import io.dekorate.utils.Serialization;
 import java.net.URL;

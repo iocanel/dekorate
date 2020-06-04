@@ -81,6 +81,7 @@ public abstract class AbstractAnnotationProcessor extends AbstractProcessor impl
     return session;
   }
 
+
   /**
    * @return the application properties
    */
