@@ -18,7 +18,7 @@ package io.dekorate.examples.openshift;
 
 import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.fabric8.kubernetes.api.model.HasMetadata;
-import io.dekorate.deps.openshift.api.model.BuildConfig;
+import io.fabric8.openshift.api.model.BuildConfig;
 import io.dekorate.utils.Serialization;
 import org.junit.jupiter.api.Test;
 

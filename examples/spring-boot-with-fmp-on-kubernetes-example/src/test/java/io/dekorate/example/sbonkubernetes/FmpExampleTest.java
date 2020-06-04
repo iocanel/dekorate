@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
-import io.dekorate.deps.openshift.api.model.DeploymentConfig;
+import io.fabric8.openshift.api.model.DeploymentConfig;
 import io.dekorate.utils.Serialization;
 import org.junit.jupiter.api.Test;
 

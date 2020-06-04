@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: Openshift</name>
 
   <modules>
+    <module>dekorate-openshift</module>
     <module>openshift-annotations</module>
   </modules>
 

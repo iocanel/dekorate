@@ -246,7 +246,7 @@
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.openshift</pattern>
-                  <shadedPattern>io.dekorate.deps.openshift</shadedPattern>
+                  <shadedPattern>io.fabric8.openshift</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.knative</pattern>

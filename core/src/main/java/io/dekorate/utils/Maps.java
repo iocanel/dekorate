@@ -133,14 +133,11 @@ public class Maps {
 
   public static <A extends Annotation> Map<String, Object> fromAnnotation(A annotation, Class<? extends A> type) {
     Map<String, Object> result = new HashMap<>();
-    System.out.println("Converting "+ annotation.getClass().getName() + " to map!");
     try {
       for (Method m : type.getDeclaredMethods()) {
-        System.out.println("Found field:"+m.getName());
         Object value = m.invoke(annotation);
         if (m.getReturnType().isPrimitive() || m.getReturnType().isEnum()) {
 
-          System.out.println("Add primitive/enum value with key:" + m.getName() + " and value:"+value);
           result.put(m.getName(), m.invoke(annotation));
         } else if (m.getReturnType().isAnnotation()) {
           if (value instanceof Object[]) {

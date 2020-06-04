@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: S2i</name>
 
   <modules>
+    <module>dekorate-s2i</module>
     <module>s2i-annotations</module>
   </modules>
 

@@ -106,7 +106,54 @@
           <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${version.maven-shade-plugin}</version>
+        <executions>
+          <execution>
+            <id>annotation</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>annotations</shadedClassifierName>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <includes>
+                    <include>io/dekorate/docker/annotation/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                  </includes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+          <execution>
+            <id>processor</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>processors</shadedClassifierName>
+              <filters>
+                <filter>
+                  <artifact>*:*</artifact>
+                  <includes>
+                    <include>io/dekorate/docker/apt/**</include>
+                    <include>META-INF/services/*</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                  </includes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
    </plugins>
   </build>
-
 </project>

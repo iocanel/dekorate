@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2018 The original authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>openshift</artifactId>
+    <groupId>io.dekorate</groupId>
+    <version>2.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>io.dekorate</groupId>
+  <artifactId>dekorate-openshift</artifactId>
+  <name>Dekorate :: Modules :: Openshift :: Dekorate Openshift </name>
+
+  <dependencies>
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-core</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-s2i</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.sundr</groupId>
+      <artifactId>builder-annotations</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>openshift-client</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+     <!-- Compression -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <optional>true</optional>
+    </dependency>
+     <!-- Serialization  -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-properties</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- Misc -->
+   <dependency>
+      <groupId>org.fusesource.jansi</groupId>
+      <artifactId>jansi</artifactId>
+      <optional>true</optional>
+    </dependency>
+ 
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${version.junit-jupiter}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${version.junit-jupiter}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>${version.junit-platform}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${version.junit-platform}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${version.assertj}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${version.maven-compiler-plugin}</version>
+        <configuration>
+          <source>${java.source}</source>
+          <target>${java.target}</target>
+          <annotationProcessors>
+            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
+          </annotationProcessors>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>copy-files</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="copy annotation to annotations module">
+                <copydir src="src/main/java/io/dekorate/openshift/annotation/" includes="**.java" dest="../openshift-annotations/src/main/java/io/dekorate/openshift/annotation/" />
+              </target>
+            </configuration>                       
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${version.maven-shade-plugin}</version>
+        <executions>
+          <execution>
+            <id>jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
+              <artifactSet>
+                <includes>
+                  <include>io.dekorate:dekorate-openshift</include>
+                </includes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <includes>
+                    <include>io/dekorate/openshift/adapter/**</include>
+                    <include>io/dekorate/openshift/config/**</include>
+                    <include>io/dekorate/openshift/decorator/**</include>
+                    <include>io/dekorate/openshift/generator/**</include>
+                    <include>io/dekorate/openshift/handler/**</include>
+                    <include>io/dekorate/openshift/hook/**</include>
+                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                    <include>META-INF/services/*</include>
+                  </includes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+          <execution>
+            <id>nodeps</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>nodeps</shadedClassifierName>
+              <artifactSet>
+                <includes>
+                  <include>io.dekorate:dekorate-openshift</include>
+                </includes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <includes>
+                    <include>io/dekorate/openshift/adapter/**</include>
+                    <include>io/dekorate/openshift/config/**</include>
+                    <include>io/dekorate/openshift/decorator/**</include>
+                    <include>io/dekorate/openshift/generator/**</include>
+                    <include>io/dekorate/openshift/handler/**</include>
+                    <include>io/dekorate/openshift/hook/**</include>
+                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                    <include>META-INF/services/*</include>
+                  </includes>
+                </filter>
+              </filters>
+              <relocations>
+                <relocation>
+                  <pattern>io.fabric8.kubernetes</pattern>
+                  <shadedPattern>io.dekorate.deps.kubernetes</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.openshift</pattern>
+                  <shadedPattern>io.fabric8.openshift</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.knative</pattern>
+                  <shadedPattern>io.dekorate.deps.knative</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.tekton</pattern>
+                  <shadedPattern>io.dekorate.deps.tekton</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.servicecatalog</pattern>
+                  <shadedPattern>io.dekorate.deps.servicecatalog</shadedPattern>
+                </relocation>
+                 <relocation>
+                    <pattern>me.snowdrop.applicationcrd</pattern>
+                    <shadedPattern>io.dekorate.deps.applicationcrd</shadedPattern>
+                 </relocation>
+                <relocation>
+                  <pattern>io.fabric8.zjsonpatch</pattern>
+                  <shadedPattern>io.dekorate.deps.zjsonpatch</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.commons</pattern>
+                  <shadedPattern>io.dekorate.deps.commons</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>okio</pattern>
+                  <shadedPattern>io.dekorate.deps.okio</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>okhttp3</pattern>
+                  <shadedPattern>io.dekorate.deps.okhttp3</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>com.fasterxml.jackson</pattern>
+                  <shadedPattern>io.dekorate.deps.jackson</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.yaml.snakeyaml</pattern>
+                  <shadedPattern>io.dekorate.deps.snakeyaml</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>javax.validation</pattern>
+                  <shadedPattern>io.dekorate.deps.javax.validation</shadedPattern>
+                </relocation>
+                <relocation>
+                    <pattern>org.fusesource.jansi</pattern>
+                    <shadedPattern>io.dekorate.deps.jansi</shadedPattern>
+                </relocation>
+              </relocations>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+   </plugins>
+  </build>
+</project>

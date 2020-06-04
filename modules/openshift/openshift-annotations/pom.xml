@@ -25,26 +25,47 @@ limitations under the License.
 
   <groupId>io.dekorate</groupId>
   <artifactId>openshift-annotations</artifactId>
-  <name>Dekorate :: Annotations :: Openshift</name>
+  <name>Dekorate :: Modules :: Openshift :: Openshift Annotations</name>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-core</artifactId>
+      <artifactId>dekorate-dependencies</artifactId>
       <version>${project.version}</version>
     </dependency>
+
     <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>s2i-annotations</artifactId>
+      <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
-    </dependency>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-openshift</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+       <groupId>io.dekorate</groupId>
+       <artifactId>s2i-annotations</artifactId>
+       <version>${project.version}</version>
+     </dependency>
+
+     <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+     </dependency>
+
     <dependency>
       <groupId>io.sundr</groupId>
       <artifactId>builder-annotations</artifactId>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
-
 
     <!-- Testing -->
     <dependency>
@@ -130,47 +151,8 @@ limitations under the License.
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
                     <include>io/dekorate/openshift/apt/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/configurator/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
-                    <include>io/dekorate/openshift/util/**</include>
-                    <include>io/dekorate/openshift/*</include>
                     <include>META-INF/services/*</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
-                    <include>io/dekorate/openshift/annotation/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/configurator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
-                    <include>io/dekorate/openshift/util/**</include>
-                    <include>io/dekorate/openshift/*</include>
-                    <include>META-INF/services/io.dekorate.Generator</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>

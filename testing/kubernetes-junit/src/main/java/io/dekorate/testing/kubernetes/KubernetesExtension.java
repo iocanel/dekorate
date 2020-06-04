@@ -42,7 +42,7 @@ import io.fabric8.kubernetes.api.model.apps.ReplicaSet;
 import io.fabric8.kubernetes.client.KubernetesClient;
 import io.fabric8.kubernetes.client.VersionInfo;
 import io.fabric8.kubernetes.client.internal.readiness.Readiness;
-import io.dekorate.deps.openshift.api.model.DeploymentConfig;
+import io.fabric8.openshift.api.model.DeploymentConfig;
 import io.dekorate.kubernetes.config.ImageConfiguration;
 import io.dekorate.kubernetes.config.ImageConfigurationBuilder;
 import io.dekorate.kubernetes.config.KubernetesConfig;

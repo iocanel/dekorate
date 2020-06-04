@@ -8,13 +8,28 @@
 
   <groupId>io.dekorate</groupId>
   <artifactId>s2i-annotations</artifactId>
-  <name>Dekorate :: Annotations :: S2i</name>
+  <name>Dekorate :: Modules :: S2i :: S2i Annotations</name>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-s2i</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-dependencies</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
@@ -23,6 +38,35 @@
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+     <!-- Serialization  -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-properties</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -58,9 +102,7 @@
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -101,46 +143,8 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/s2i/adapter/**</include>
-                    <include>io/dekorate/s2i/annotation/**</include>
                     <include>io/dekorate/s2i/apt/**</include>
-                    <include>io/dekorate/s2i/buildservice/**</include>
-                    <include>io/dekorate/s2i/config/**</include>
-                    <include>io/dekorate/s2i/configurator/**</include>
-                    <include>io/dekorate/s2i/generator/**</include>
-                    <include>io/dekorate/s2i/handler/**</include>
-                    <include>io/dekorate/s2i/util/**</include>
-                    <include>META-INF/services/io.dekorate.BuildServiceFactory</include>
-                    <include>META-INF/services/io.dekorate.Generator</include>
-                    <include>META-INF/services/javax.annotation.processing.Processor</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/s2i/adapter/**</include>
-                    <include>io/dekorate/s2i/buildservice/**</include>
-                    <include>io/dekorate/s2i/config/**</include>
-                    <include>io/dekorate/s2i/configurator/**</include>
-                    <include>io/dekorate/s2i/generator/**</include>
-                    <include>io/dekorate/s2i/handler/**</include>
-                    <include>io/dekorate/s2i/util/**</include>
-                    <include>META-INF/services/io.dekorate.BuildServiceFactory</include>
-                    <include>META-INF/services/io.dekorate.Generator</include>
+                    <include>META-INF/services/*</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
