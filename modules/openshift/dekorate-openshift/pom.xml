@@ -243,15 +243,15 @@ limitations under the License.
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.openshift</pattern>
-                  <shadedPattern>io.fabric8.openshift</shadedPattern>
+                  <shadedPattern>io.dekorate.deps.openshift</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.knative</pattern>
-                  <shadedPattern>io.fabric8.knative</shadedPattern>
+                  <shadedPattern>io.dekorate.deps.knative</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.tekton</pattern>
-                  <shadedPattern>io.fabric8.tekton</shadedPattern>
+                  <shadedPattern>io.dekorate.deps.tekton</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.servicecatalog</pattern>
