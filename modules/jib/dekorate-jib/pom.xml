@@ -17,27 +17,20 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>openshift</artifactId>
+    <artifactId>jib</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.dekorate</groupId>
-  <artifactId>dekorate-openshift</artifactId>
-  <name>Dekorate :: Modules :: Openshift :: Dekorate Openshift </name>
+  <artifactId>dekorate-jib</artifactId>
+  <name>Dekorate :: Modules :: Jib :: Dekorate Jib</name>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
-      <version>${project.version}</version>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-s2i</artifactId>
       <version>${project.version}</version>
       <optional>true</optional>
     </dependency>
@@ -51,22 +44,10 @@ limitations under the License.
 
     <dependency>
       <groupId>io.fabric8</groupId>
-      <artifactId>openshift-client</artifactId>
+      <artifactId>kubernetes-model</artifactId>
       <optional>true</optional>
     </dependency>
 
-     <!-- Compression -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-compress</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <optional>true</optional>
-    </dependency>
      <!-- Serialization  -->
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -89,13 +70,6 @@ limitations under the License.
       <optional>true</optional>
     </dependency>
 
-    <!-- Misc -->
-   <dependency>
-      <groupId>org.fusesource.jansi</groupId>
-      <artifactId>jansi</artifactId>
-      <optional>true</optional>
-    </dependency>
- 
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -148,14 +122,14 @@ limitations under the License.
         <version>1.7</version>
         <executions>
           <execution>
-            <id>copy-files</id>
+            <id>copy-swf-files</id>
             <phase>compile</phase>
             <goals>
               <goal>run</goal>
             </goals>
             <configuration>
               <target name="copy annotation to annotations module">
-                <copydir src="src/main/java/io/dekorate/openshift/annotation/" includes="**.java" dest="../openshift-annotations/src/main/java/io/dekorate/openshift/annotation/" />
+                <copydir src="src/main/java/io/dekorate/jib/annotation/" includes="**.java" dest="../docker-annotations/src/main/java/io/dekorate/docker/annotation/" />
               </target>
             </configuration>                       
           </execution>
@@ -180,20 +154,17 @@ limitations under the License.
               </archive>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-openshift</include>
+                  <include>io.dekorate:dekorate-jib</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <artifact>io.dekorate:dekorate-jib</artifact>
                   <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/hook/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>io/dekorate/jib/adapter/**</include>
+                    <include>io/dekorate/jib/config/**</include>
+                    <include>io/dekorate/jib/generator/**</include>
+                    <include>io/dekorate/jib/buildservice/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>
@@ -217,20 +188,21 @@ limitations under the License.
               <shadedClassifierName>nodeps</shadedClassifierName>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-openshift</include>
+                  <include>io.dekorate:jib-docker</include>
+                  <include>io.fabric8:kubernetes-mode</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <artifact>io.dekorate:dekorate-jib</artifact>
+                  <excludes>
+                    <exclude>*</exclude>
+                  </excludes>
                   <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/hook/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>io/dekorate/jib/adapter/**</include>
+                    <include>io/dekorate/jib/config/**</include>
+                    <include>io/dekorate/jib/generator/**</include>
+                    <include>io/dekorate/jib/buildservice/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>
@@ -240,58 +212,6 @@ limitations under the License.
                 <relocation>
                   <pattern>io.fabric8.kubernetes</pattern>
                   <shadedPattern>io.dekorate.deps.kubernetes</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>io.fabric8.openshift</pattern>
-                  <shadedPattern>io.fabric8.openshift</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>io.fabric8.knative</pattern>
-                  <shadedPattern>io.fabric8.knative</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>io.fabric8.tekton</pattern>
-                  <shadedPattern>io.dekorate.deps.tekton</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>io.fabric8.servicecatalog</pattern>
-                  <shadedPattern>io.dekorate.deps.servicecatalog</shadedPattern>
-                </relocation>
-                 <relocation>
-                    <pattern>me.snowdrop.applicationcrd</pattern>
-                    <shadedPattern>io.dekorate.deps.applicationcrd</shadedPattern>
-                 </relocation>
-                <relocation>
-                  <pattern>io.fabric8.zjsonpatch</pattern>
-                  <shadedPattern>io.dekorate.deps.zjsonpatch</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>org.apache.commons</pattern>
-                  <shadedPattern>io.dekorate.deps.commons</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>okio</pattern>
-                  <shadedPattern>io.dekorate.deps.okio</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>okhttp3</pattern>
-                  <shadedPattern>io.dekorate.deps.okhttp3</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>com.fasterxml.jackson</pattern>
-                  <shadedPattern>io.dekorate.deps.jackson</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>org.yaml.snakeyaml</pattern>
-                  <shadedPattern>io.dekorate.deps.snakeyaml</shadedPattern>
-                </relocation>
-                <relocation>
-                  <pattern>javax.validation</pattern>
-                  <shadedPattern>io.dekorate.deps.javax.validation</shadedPattern>
-                </relocation>
-                <relocation>
-                    <pattern>org.fusesource.jansi</pattern>
-                    <shadedPattern>io.dekorate.deps.jansi</shadedPattern>
                 </relocation>
               </relocations>
               <transformers>

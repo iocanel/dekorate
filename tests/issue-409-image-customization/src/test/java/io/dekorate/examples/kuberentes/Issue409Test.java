@@ -21,7 +21,7 @@ import io.fabric8.kubernetes.api.model.Container;
 import io.fabric8.kubernetes.api.model.Probe;
 import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.fabric8.kubernetes.api.model.apps.Deployment;
-import io.dekorate.deps.knative.serving.v1.Service;
+import io.fabric8.knative.serving.v1.Service;
 import io.dekorate.utils.Serialization;
 import java.net.URL;
 import java.util.Optional;

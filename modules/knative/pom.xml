@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: Knative</name>
 
   <modules>
+    <module>dekorate-knative</module>
     <module>knative-annotations</module>
   </modules>
 

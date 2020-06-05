@@ -17,15 +17,15 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>openshift</artifactId>
+    <artifactId>knative</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.dekorate</groupId>
-  <artifactId>dekorate-openshift</artifactId>
-  <name>Dekorate :: Modules :: Openshift :: Dekorate Openshift </name>
+  <artifactId>dekorate-knative</artifactId>
+  <name>Dekorate :: Modules :: Knative :: Dekorate Knative </name>
 
   <dependencies>
     <dependency>
@@ -37,7 +37,7 @@ limitations under the License.
 
     <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-s2i</artifactId>
+      <artifactId>dekorate-docker</artifactId>
       <version>${project.version}</version>
       <optional>true</optional>
     </dependency>
@@ -51,7 +51,7 @@ limitations under the License.
 
     <dependency>
       <groupId>io.fabric8</groupId>
-      <artifactId>openshift-client</artifactId>
+      <artifactId>knative-client</artifactId>
       <optional>true</optional>
     </dependency>
 
@@ -155,7 +155,7 @@ limitations under the License.
             </goals>
             <configuration>
               <target name="copy annotation to annotations module">
-                <copydir src="src/main/java/io/dekorate/openshift/annotation/" includes="**.java" dest="../openshift-annotations/src/main/java/io/dekorate/openshift/annotation/" />
+                <copydir src="src/main/java/io/dekorate/knative/annotation/" includes="**.java" dest="../knative-annotations/src/main/java/io/dekorate/knative/annotation/" />
               </target>
             </configuration>                       
           </execution>
@@ -180,20 +180,19 @@ limitations under the License.
               </archive>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-openshift</include>
+                  <include>io.dekorate:dekorate-knative</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <artifact>io.dekorate:dekorate-knative</artifact>
                   <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/hook/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>io/dekorate/knative/adapter/**</include>
+                    <include>io/dekorate/knative/config/**</include>
+                    <include>io/dekorate/knative/decorator/**</include>
+                    <include>io/dekorate/knative/generator/**</include>
+                    <include>io/dekorate/knative/handler/**</include>
+                    <include>io/dekorate/knative/util/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>
@@ -217,20 +216,19 @@ limitations under the License.
               <shadedClassifierName>nodeps</shadedClassifierName>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-openshift</include>
+                  <include>io.dekorate:dekorate-knative</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-openshift</artifact>
+                  <artifact>io.dekorate:dekorate-knative</artifact>
                   <includes>
-                    <include>io/dekorate/openshift/adapter/**</include>
-                    <include>io/dekorate/openshift/config/**</include>
-                    <include>io/dekorate/openshift/decorator/**</include>
-                    <include>io/dekorate/openshift/generator/**</include>
-                    <include>io/dekorate/openshift/handler/**</include>
-                    <include>io/dekorate/openshift/hook/**</include>
-                    <include>io/dekorate/openshift/listener/**</include>
+                    <include>io/dekorate/knative/adapter/**</include>
+                    <include>io/dekorate/knative/config/**</include>
+                    <include>io/dekorate/knative/decorator/**</include>
+                    <include>io/dekorate/knative/generator/**</include>
+                    <include>io/dekorate/knative/handler/**</include>
+                    <include>io/dekorate/knative/util/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>

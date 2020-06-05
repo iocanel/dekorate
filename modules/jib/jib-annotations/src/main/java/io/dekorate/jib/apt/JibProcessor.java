@@ -24,19 +24,13 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.config.AnnotationConfiguration;
-import io.dekorate.config.ConfigurationSupplier;
-import io.dekorate.jib.adapter.JibBuildConfigAdapter;
 import io.dekorate.jib.annotation.JibBuild;
-import io.dekorate.jib.config.JibBuildConfig;
-import io.dekorate.jib.generator.JibGenerator;
-import io.dekorate.kubernetes.configurator.ApplyBuildToImageConfiguration;
 import io.dekorate.processor.AbstractAnnotationProcessor;
-import io.dekorate.project.ApplyProjectInfo;
+import io.dekorate.utils.Maps;
 
 @SupportedAnnotationTypes("io.dekorate.jib.annotation.JibBuild")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class JibProcessor extends AbstractAnnotationProcessor implements JibGenerator {
+public class JibProcessor extends AbstractAnnotationProcessor  {
 
 
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -51,21 +45,10 @@ public class JibProcessor extends AbstractAnnotationProcessor implements JibGene
         if (jib == null) {
           continue;
         }
-        add(mainClass);
+        getSession().addAnnotationConfiguration(Maps.fromAnnotation("jib", jib, JibBuild.class));
       }
     }
     return false;
-  }
-
-  @Override
-  public void add(Element element) {
-    JibBuild jib = element.getAnnotation(JibBuild.class);
-    if (jib != null) {
-      ConfigurationSupplier<JibBuildConfig> config = new AnnotationConfiguration<>(JibBuildConfigAdapter.newBuilder(jib)
-                                                                                 .accept(new ApplyProjectInfo(getProject()))
-                                                                                 .accept(new ApplyBuildToImageConfiguration()));
-      on(config);
-    }
   }
 }
 

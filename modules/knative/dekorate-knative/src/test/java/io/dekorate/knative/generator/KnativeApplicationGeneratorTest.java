@@ -63,7 +63,7 @@ class KnativeApplicationGeneratorTest {
       }});
     }};
 
-    generator.add(map);
+    generator.addPropertyConfiguration(map);
     final Map<String, String> result = session.close();
     KubernetesList list=session.getGeneratedResources().get("knative");
     assertThat(list).isNotNull();
@@ -73,7 +73,5 @@ class KnativeApplicationGeneratorTest {
 
     assertThat(tempDir.resolve("knative.json")).exists();
     assertThat(tempDir.resolve("knative.yml")).exists();
-
-    assertThat(result).hasSize(4);
   }
 }

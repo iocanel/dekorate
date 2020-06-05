@@ -12,14 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-package io.dekorate.knative.util;
+ *
+ **/
 
-import io.dekorate.deps.knative.client.DefaultKnativeClient;
-import io.dekorate.deps.knative.client.KnativeClient;
+package io.dekorate.knative.annotation;
 
-public class KnativeUtils {
+public enum HttpTransportVersion {
 
-  private static final KnativeClient client = new DefaultKnativeClient();
-
+  HTTP1,
+  H2C,
+  ANY;
 }

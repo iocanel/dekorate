@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: Jib</name>
 
   <modules>
+    <module>dekorate-jib</module>
     <module>jib-annotations</module>
   </modules>
 

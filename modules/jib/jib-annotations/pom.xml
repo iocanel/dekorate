@@ -25,7 +25,7 @@ limitations under the License.
 
   <groupId>io.dekorate</groupId>
   <artifactId>jib-annotations</artifactId>
-  <name>Dekorate :: Annotations :: Jib</name>
+  <name>Dekorate :: Modules :: Jib :: Jib Annotations</name>
 
   <properties>
     <version.jib>1.6.1</version.jib>
@@ -36,6 +36,21 @@ limitations under the License.
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-jib</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-dependencies</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
@@ -45,6 +60,33 @@ limitations under the License.
       <optional>true</optional>
     </dependency>
 
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+     <!-- Serialization  -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-properties</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <build>
@@ -55,12 +97,10 @@ limitations under the License.
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
-       <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>${version.maven-shade-plugin}</version>
@@ -79,7 +119,6 @@ limitations under the License.
                   <artifact>*:*</artifact>
                   <includes>
                     <include>io/dekorate/jib/annotation/**</include>
-                    <include>META-INF/services/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -99,15 +138,8 @@ limitations under the License.
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/jib/adapter/**</include>
-                    <include>io/dekorate/jib/buildservice/**</include>
-                    <include>io/dekorate/jib/config/**</include>
-                    <include>io/dekorate/jib/configurator/**</include>
-                    <include>io/dekorate/jib/decorator/**</include>
-                    <include>io/dekorate/jib/generator/**</include>
-                    <include>io/dekorate/jib/handler/**</include>
                     <include>io/dekorate/jib/apt/**</include>
-                    <include>META-INF/services/**</include>
+                    <include>META-INF/services/*</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -116,6 +148,6 @@ limitations under the License.
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
 </project>

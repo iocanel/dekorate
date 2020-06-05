@@ -28,7 +28,9 @@ import io.dekorate.Session;
 import io.dekorate.SessionListener;
 import io.dekorate.WithProject;
 import io.dekorate.WithSession;
+import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.config.ConfigurationSupplier;
+import io.dekorate.config.PropertyConfiguration;
 import io.fabric8.kubernetes.api.model.KubernetesList;
 import io.dekorate.hook.ImageBuildHook;
 import io.dekorate.knative.adapter.KnativeConfigAdapter;
@@ -55,13 +57,23 @@ public interface KnativeApplicationGenerator extends Generator, WithSession, Wit
     return KnativeConfig.class;
   }
 
-  default void add(Map map) {
+  default void addAnnotationConfiguration(Map map) {
     KnativeConfig knativeConfig = KnativeConfigAdapter.newBuilder((Map) map.get(KnativeApplication.class.getName())).build();
-    on(new ConfigurationSupplier<>(KnativeConfigAdapter.newBuilder(propertiesMap(map, KnativeConfig.class))
+    on(new AnnotationConfiguration<>(KnativeConfigAdapter.newBuilder(propertiesMap(map, KnativeConfig.class))
                                    .accept(new ApplyImagePullSecretConfiguration())
                                    .accept(new ApplyBuildToImageConfiguration())
                                    .accept(new ApplyProjectInfo(getProject()))));
   }
+
+  default void addPropertyConfiguration(Map map) {
+    KnativeConfig knativeConfig = KnativeConfigAdapter.newBuilder((Map) map.get(KnativeApplication.class.getName())).build();
+    on(new PropertyConfiguration<>(KnativeConfigAdapter.newBuilder(propertiesMap(map, KnativeConfig.class))
+                                   .accept(new ApplyImagePullSecretConfiguration())
+                                   .accept(new ApplyBuildToImageConfiguration())
+                                   .accept(new ApplyProjectInfo(getProject()))));
+  }
+
+
 
     default void on(ConfigurationSupplier<KnativeConfig> config) {
       Session session = getSession();

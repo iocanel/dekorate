@@ -24,6 +24,7 @@ import io.dekorate.Session;
 import io.dekorate.WithProject;
 import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.config.ConfigurationSupplier;
+import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.config.PropertyConfiguration;
 import io.dekorate.jib.adapter.JibBuildConfigAdapter;
 import io.dekorate.jib.annotation.JibBuild;
@@ -46,7 +47,16 @@ public interface JibGenerator extends Generator, WithProject  {
   }
 
   @Override
-  default void add(Map map) {
+  default void addAnnotationConfiguration(Map map) {
+        on(new AnnotationConfiguration<>(
+            JibBuildConfigAdapter
+            .newBuilder(propertiesMap(map, JibBuildConfig.class))
+                                                .accept(new ApplyProjectInfo(getProject()))
+                                                .accept(new ApplyBuildToImageConfiguration())));
+  }
+
+  @Override
+  default void addPropertyConfiguration(Map map) {
         on(new PropertyConfiguration<>(
             JibBuildConfigAdapter
             .newBuilder(propertiesMap(map, JibBuildConfig.class))

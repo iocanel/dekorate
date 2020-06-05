@@ -247,7 +247,7 @@ limitations under the License.
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.knative</pattern>
-                  <shadedPattern>io.dekorate.deps.knative</shadedPattern>
+                  <shadedPattern>io.fabric8.knative</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.tekton</pattern>
