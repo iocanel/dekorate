@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2018 The original authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>annotations</artifactId>
+    <artifactId>crd</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
@@ -9,53 +25,53 @@
 
   <groupId>io.dekorate</groupId>
   <artifactId>crd-annotations</artifactId>
-<name>Dekorate :: Annotations :: Custom Resource</name>
+  <name>Dekorate :: Modules :: C.R.D. :: Annotation Processor</name>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-core</artifactId>
+      <artifactId>dekorate-dependencies</artifactId>
       <version>${project.version}</version>
     </dependency>
 
-    <!-- This is the only case in dekorate where we are not using sundrio just for generating own code!
-         This module does call sundrio functions directly, so we can make sundrio dependencies optional here.
-     -->
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-core</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-crd</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+       <groupId>io.dekorate</groupId>
+       <artifactId>docker-annotations</artifactId>
+       <version>${project.version}</version>
+     </dependency>
+
+     <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+     </dependency>
+
     <dependency>
       <groupId>io.sundr</groupId>
       <artifactId>builder-annotations</artifactId>
       <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
       <groupId>io.sundr</groupId>
       <artifactId>sundr-codegen</artifactId>
-    </dependency>
-
-    <!-- Testing -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
+      <scope>compile</scope>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -67,9 +83,7 @@
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -84,6 +98,11 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>annotations</shadedClassifierName>
               <filters>
@@ -110,40 +129,8 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/crd/adapter/**</include>
-                    <include>io/dekorate/crd/annotation/**</include>
                     <include>io/dekorate/crd/apt/**</include>
-                    <include>io/dekorate/crd/config/**</include>
-                    <include>io/dekorate/crd/configurator/**</include>
-                    <include>io/dekorate/crd/generator/**</include>
-                    <include>io/dekorate/crd/handler/**</include>
-                    <include>io/dekorate/crd/util/**</include>
-                    <include>META-INF/services/javax.annotation.processing.Processor</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/crd/adapter/**</include>
-                    <include>io/dekorate/crd/config/**</include>
-                    <include>io/dekorate/crd/configurator/**</include>
-                    <include>io/dekorate/crd/generator/**</include>
-                    <include>io/dekorate/crd/handler/**</include>
-                    <include>io/dekorate/crd/util/**</include>
+                    <include>META-INF/services/*</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -152,7 +139,6 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
-
 </project>

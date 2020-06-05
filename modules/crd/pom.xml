@@ -12,6 +12,9 @@
   <name>Dekorate :: Modules :: C.R.D.</name>
 
   <modules>
+    <module>dekorate-crd</module>
+    <module>crd-annotations</module>
+    <module>crd-annotations-internal</module>
   </modules>
 
 </project>

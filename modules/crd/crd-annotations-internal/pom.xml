@@ -17,43 +17,27 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>halkyon</artifactId>
+    <artifactId>crd</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.dekorate</groupId>
-  <artifactId>halkyon-annotations</artifactId>
-  <name>Dekorate :: Modules :: Halkyon :: Annotation Processor</name>
+  <artifactId>crd-annotations-internal</artifactId>
+  <name>Dekorate :: Modules :: C.R.D. :: Annotation Processor :: Internal</name>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-dependencies</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
-      <classifier>nodeps</classifier>
      </dependency>
 
      <dependency>
       <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-halkyon-model</artifactId>
+      <artifactId>dekorate-crd</artifactId>
       <version>${project.version}</version>
-      <classifier>nodeps</classifier>
-     </dependency>
-
-
-     <dependency>
-      <groupId>io.dekorate</groupId>
-      <artifactId>dekorate-halkyon</artifactId>
-      <version>${project.version}</version>
-      <classifier>nodeps</classifier>
      </dependency>
 
      <dependency>
@@ -75,6 +59,12 @@ limitations under the License.
       <optional>true</optional>
     </dependency>
 
+    <dependency>
+      <groupId>io.sundr</groupId>
+      <artifactId>sundr-codegen</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
   </dependencies>
 
   <build>
@@ -111,7 +101,7 @@ limitations under the License.
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/halkyon/annotation/**</include>
+                    <include>io/dekorate/crd/annotation/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -131,7 +121,7 @@ limitations under the License.
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/halkyon/apt/**</include>
+                    <include>io/dekorate/crd/apt/**</include>
                     <include>META-INF/services/*</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>

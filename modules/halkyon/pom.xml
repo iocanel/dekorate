@@ -12,6 +12,8 @@
   <name>Dekorate :: Modules :: Halkyon</name>
 
   <modules>
+    <module>dekorate-halkyon-model</module>
+    <module>dekorate-halkyon</module>
     <module>halkyon-annotations</module>
   </modules>
 

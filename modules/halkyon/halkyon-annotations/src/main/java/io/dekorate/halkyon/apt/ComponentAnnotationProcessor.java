@@ -24,19 +24,15 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.doc.Description;
-import io.dekorate.halkyon.adapter.ComponentConfigAdapter;
 import io.dekorate.halkyon.annotation.HalkyonComponent;
-import io.dekorate.halkyon.config.ComponentConfig;
-import io.dekorate.halkyon.configurator.ApplyProject;
-import io.dekorate.halkyon.generator.ComponentConfigGenerator;
 import io.dekorate.processor.AbstractAnnotationProcessor;
+import io.dekorate.utils.Maps;
 
 @Description("Generate halkyon component custom resources.")
 @SupportedAnnotationTypes("io.dekorate.halkyon.annotation.HalkyonComponent")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class ComponentAnnotationProcessor extends AbstractAnnotationProcessor implements ComponentConfigGenerator {
+public class ComponentAnnotationProcessor extends AbstractAnnotationProcessor {
   
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     if (roundEnv.processingOver()) {
@@ -45,18 +41,10 @@ public class ComponentAnnotationProcessor extends AbstractAnnotationProcessor im
     }
     for (TypeElement typeElement : annotations) {
       for (Element mainClass : roundEnv.getElementsAnnotatedWith(typeElement)) {
-        add(mainClass);
+        HalkyonComponent component = mainClass.getAnnotation(HalkyonComponent.class);
+        getSession().addAnnotationConfiguration(Maps.fromAnnotation("halkyon-componnet", component, HalkyonComponent.class));
       }
     }
     return false;
   }
- 
-  @Override
-  public void add(Element element) {
-    HalkyonComponent component = element.getAnnotation(HalkyonComponent.class);
-    add(component != null
-      ? new AnnotationConfiguration<>(ComponentConfigAdapter.newBuilder(component).accept(new ApplyProject(getProject())))
-      : new AnnotationConfiguration<>(ComponentConfig.newComponentConfigBuilder().accept(new ApplyProject(getProject()))));
-  }
-  
 }
