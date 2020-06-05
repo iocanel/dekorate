@@ -228,6 +228,21 @@ limitations under the License.
               <filters>
                 <filter>
                   <artifact>*:*</artifact>
+                  <includes>
+                    <include>io/dekorate/adapter/**</include>
+                    <include>io/dekorate/apt/**</include>
+                    <include>io/dekorate/annotation/**</include>
+                    <include>io/dekorate/config/**</include>
+                    <include>io/dekorate/doc/**</include>
+                    <include>io/dekorate/hook/**</include>
+                    <include>io/dekorate/kubernetes/**</include>
+                    <include>io/dekorate/logger/**</include>
+                    <include>io/dekorate/processor/**</include>
+                    <include>io/dekorate/project/**</include>
+                    <include>io/dekorate/utils/**</include>
+                    <include>META-INF/services/*</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                  </includes>
                   <excludes>
                     <exclude>META-INF/jandex.idx</exclude>
                   </excludes>

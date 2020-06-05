@@ -17,12 +17,12 @@ package io.dekorate.example.sbonkubernetes;
 
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.KubernetesList;
-import io.dekorate.deps.tekton.pipeline.v1beta1.Pipeline;
-import io.dekorate.deps.tekton.pipeline.v1beta1.PipelineRun;
-import io.dekorate.deps.tekton.pipeline.v1beta1.PipelineTask;
-import io.dekorate.deps.tekton.pipeline.v1beta1.Task;
-import io.dekorate.deps.tekton.pipeline.v1beta1.TaskRun;
-import io.dekorate.deps.tekton.pipeline.v1beta1.WorkspaceBinding;
+import io.fabric8.tekton.pipeline.v1beta1.Pipeline;
+import io.fabric8.tekton.pipeline.v1beta1.PipelineRun;
+import io.fabric8.tekton.pipeline.v1beta1.PipelineTask;
+import io.fabric8.tekton.pipeline.v1beta1.Task;
+import io.fabric8.tekton.pipeline.v1beta1.TaskRun;
+import io.fabric8.tekton.pipeline.v1beta1.WorkspaceBinding;
 import io.dekorate.utils.Serialization;
 import org.junit.jupiter.api.Test;
 

@@ -17,15 +17,15 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>knative</artifactId>
+    <artifactId>tekton</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.dekorate</groupId>
-  <artifactId>dekorate-knative</artifactId>
-  <name>Dekorate :: Modules :: Knative :: Dekorate Knative </name>
+  <artifactId>dekorate-tekton</artifactId>
+  <name>Dekorate :: Modules :: Tekton :: Dekorate Tekton</name>
 
   <dependencies>
     <dependency>
@@ -51,7 +51,13 @@ limitations under the License.
 
     <dependency>
       <groupId>io.fabric8</groupId>
-      <artifactId>knative-client</artifactId>
+      <artifactId>kubernetes-client</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>tekton-client</artifactId>
       <optional>true</optional>
     </dependency>
 
@@ -155,7 +161,7 @@ limitations under the License.
             </goals>
             <configuration>
               <target name="copy annotation to annotations module">
-                <copydir src="src/main/java/io/dekorate/knative/annotation/" includes="**.java" dest="../knative-annotations/src/main/java/io/dekorate/knative/annotation/" />
+                <copydir src="src/main/java/io/dekorate/tekton/annotation/" includes="**.java" dest="../tekton-annotations/src/main/java/io/dekorate/tekton/annotation/" />
               </target>
             </configuration>                       
           </execution>
@@ -180,19 +186,19 @@ limitations under the License.
               </archive>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-knative</include>
+                  <include>io.dekorate:dekorate-tekton</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-knative</artifact>
+                  <artifact>io.dekorate:dekorate-tekton</artifact>
                   <includes>
-                    <include>io/dekorate/knative/adapter/**</include>
-                    <include>io/dekorate/knative/config/**</include>
-                    <include>io/dekorate/knative/decorator/**</include>
-                    <include>io/dekorate/knative/generator/**</include>
-                    <include>io/dekorate/knative/handler/**</include>
-                    <include>io/dekorate/knative/util/**</include>
+                    <include>io/dekorate/tekton/adapter/**</include>
+                    <include>io/dekorate/tekton/config/**</include>
+                    <include>io/dekorate/tekton/decorator/**</include>
+                    <include>io/dekorate/tekton/generator/**</include>
+                    <include>io/dekorate/tekton/handler/**</include>
+                    <include>io/dekorate/tekton/util/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>
@@ -216,19 +222,19 @@ limitations under the License.
               <shadedClassifierName>nodeps</shadedClassifierName>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-knative</include>
+                  <include>io.dekorate:dekorate-tekton</include>
                 </includes>
               </artifactSet>
               <filters>
                 <filter>
-                  <artifact>io.dekorate:dekorate-knative</artifact>
+                  <artifact>io.dekorate:dekorate-tekton</artifact>
                   <includes>
-                    <include>io/dekorate/knative/adapter/**</include>
-                    <include>io/dekorate/knative/config/**</include>
-                    <include>io/dekorate/knative/decorator/**</include>
-                    <include>io/dekorate/knative/generator/**</include>
-                    <include>io/dekorate/knative/handler/**</include>
-                    <include>io/dekorate/knative/util/**</include>
+                    <include>io/dekorate/tekton/adapter/**</include>
+                    <include>io/dekorate/tekton/config/**</include>
+                    <include>io/dekorate/tekton/decorator/**</include>
+                    <include>io/dekorate/tekton/generator/**</include>
+                    <include>io/dekorate/tekton/handler/**</include>
+                    <include>io/dekorate/tekton/util/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                     <include>META-INF/services/*</include>
                   </includes>
@@ -236,8 +242,8 @@ limitations under the License.
               </filters>
               <relocations>
                 <relocation>
-                  <pattern>io.fabric8.kubernetes</pattern>
-                  <shadedPattern>io.dekorate.deps.kubernetes</shadedPattern>
+                  <pattern>io.fabric8.tekton</pattern>
+                  <shadedPattern>io.fabric8.tekton</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.openshift</pattern>

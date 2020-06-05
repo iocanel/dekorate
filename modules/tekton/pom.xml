@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: Tekton</name>
 
   <modules>
+    <module>dekorate-tekton</module>
     <module>tekton-annotations</module>
   </modules>
 

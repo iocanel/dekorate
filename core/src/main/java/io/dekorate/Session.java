@@ -105,6 +105,7 @@ public class Session {
   }
 
   public void addPropertyConfiguration(Map<String, Object> map) {
+    map.forEach( (k,v) -> System.out.println("key:"+k + " value:"+v));
     for (Map.Entry<String, Object> entry : map.entrySet()) {
       String key = entry.getKey();
       Object value = entry.getValue();
@@ -125,6 +126,7 @@ public class Session {
   }
 
   public void addAnnotationConfiguration(Map<String, Object> map) {
+    map.forEach( (k,v) -> System.out.println("key:"+k + " value:"+v));
     for (Map.Entry<String, Object> entry : map.entrySet()) {
       String key = entry.getKey();
       Object value = entry.getValue();

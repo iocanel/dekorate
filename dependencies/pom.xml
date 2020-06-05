@@ -254,7 +254,7 @@
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.tekton</pattern>
-                  <shadedPattern>io.dekorate.deps.tekton</shadedPattern>
+                  <shadedPattern>io.fabric8.tekton</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.servicecatalog</pattern>

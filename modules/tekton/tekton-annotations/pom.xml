@@ -17,7 +17,7 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>annotations</artifactId>
+    <artifactId>tekton</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
@@ -25,53 +25,46 @@ limitations under the License.
 
   <groupId>io.dekorate</groupId>
   <artifactId>tekton-annotations</artifactId>
-  <name>Dekorate :: Annotations :: Tekton</name>
+  <name>Dekorate :: Modules :: Tekton :: Annotation Processor</name>
 
   <dependencies>
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-dependencies</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
-    </dependency>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-tekton</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+     </dependency>
+
+     <dependency>
+       <groupId>io.dekorate</groupId>
+       <artifactId>docker-annotations</artifactId>
+       <version>${project.version}</version>
+     </dependency>
+
+     <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+     </dependency>
 
     <dependency>
       <groupId>io.sundr</groupId>
       <artifactId>builder-annotations</artifactId>
       <scope>compile</scope>
       <optional>true</optional>
-    </dependency>
-
-    <!-- Testing -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <version>${version.assertj}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -83,9 +76,7 @@ limitations under the License.
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -100,6 +91,11 @@ limitations under the License.
               <goal>shade</goal>
             </goals>
             <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
               <shadedArtifactAttached>true</shadedArtifactAttached>
               <shadedClassifierName>annotations</shadedClassifierName>
               <filters>
@@ -107,6 +103,7 @@ limitations under the License.
                   <artifact>*:*</artifact>
                   <includes>
                     <include>io/dekorate/tekton/annotation/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
               </filters>
@@ -125,43 +122,9 @@ limitations under the License.
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/tekton/adapter/**</include>
                     <include>io/dekorate/tekton/apt/**</include>
-                    <include>io/dekorate/tekton/config/**</include>
-                    <include>io/dekorate/tekton/configurator/**</include>
-                    <include>io/dekorate/tekton/generator/**</include>
-                    <include>io/dekorate/tekton/handler/**</include>
-                    <include>io/dekorate/tekton/decorator/**</include>
-                    <include>io/dekorate/tekton/util/**</include>
-                    <include>META-INF/services/javax.annotation.processing.Processor</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/tekton/adapter/**</include>
-                    <include>io/dekorate/tekton/annotation/**</include>
-                    <include>io/dekorate/tekton/config/**</include>
-                    <include>io/dekorate/tekton/configurator/**</include>
-                    <include>io/dekorate/tekton/generator/**</include>
-                    <include>io/dekorate/tekton/handler/**</include>
-                    <include>io/dekorate/tekton/decorator/**</include>
-                    <include>io/dekorate/tekton/util/**</include>
-                    <include>META-INF/services/io.dekorate.Generator</include>
-                    <include>META-INF/services/io.dekorate.HandlerFactory</include>
+                    <include>META-INF/services/*</include>
+                    <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
               </filters>
@@ -169,6 +132,6 @@ limitations under the License.
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
 </project>
