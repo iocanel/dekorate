@@ -7,11 +7,12 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>jeager</artifactId>
+  <artifactId>jaeger</artifactId>
   <packaging>pom</packaging>
   <name>Dekorate :: Modules :: Jeager</name>
 
   <modules>
+    <module>dekorate-jaeger</module>
     <module>jaeger-annotations</module>
   </modules>
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>annotations</artifactId>
+    <artifactId>jaeger</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
@@ -10,13 +10,28 @@
   <groupId>io.dekorate</groupId>
   <artifactId>jaeger-annotations</artifactId>
 
-  <name>Dekorate :: Annotations :: Jaeger</name>
+  <name>Dekorate :: Modules :: Jaeger</name>
 
   <dependencies>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-dependencies</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-jaeger</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
     </dependency>
 
     <dependency>
@@ -24,31 +39,6 @@
       <artifactId>builder-annotations</artifactId>
       <scope>compile</scope>
       <optional>true</optional>
-    </dependency>
-    <!-- Testing -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-runner</artifactId>
-      <version>${version.junit-platform}</version>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 
@@ -60,9 +50,7 @@
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -83,7 +71,7 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/prometheus/annotation/**</include>
+                    <include>io/dekorate/jaeger/annotation/**</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -103,12 +91,12 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/prometheus/adapter/**</include>
-                    <include>io/dekorate/prometheus/apt/**</include>
-                    <include>io/dekorate/prometheus/config/**</include>
-                    <include>io/dekorate/prometheus/generator/**</include>
-                    <include>io/dekorate/prometheus/handler/**</include>
-                    <include>io/dekorate/prometheus/model/**</include>
+                    <include>io/dekorate/jaeger/adapter/**</include>
+                    <include>io/dekorate/jaeger/apt/**</include>
+                    <include>io/dekorate/jaeger/config/**</include>
+                    <include>io/dekorate/jaeger/generator/**</include>
+                    <include>io/dekorate/jaeger/handler/**</include>
+                    <include>io/dekorate/jaeger/model/**</include>
                     <include>META-INF/services/javax.annotation.processing.Processor</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
@@ -129,12 +117,12 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/prometheus/adapter/**</include>
-                    <include>io/dekorate/prometheus/annotation/**</include>
-                    <include>io/dekorate/prometheus/config/**</include>
-                    <include>io/dekorate/prometheus/generator/**</include>
-                    <include>io/dekorate/prometheus/handler/**</include>
-                    <include>io/dekorate/prometheus/model/**</include>
+                    <include>io/dekorate/jaeger/adapter/**</include>
+                    <include>io/dekorate/jaeger/annotation/**</include>
+                    <include>io/dekorate/jaeger/config/**</include>
+                    <include>io/dekorate/jaeger/generator/**</include>
+                    <include>io/dekorate/jaeger/handler/**</include>
+                    <include>io/dekorate/jaeger/model/**</include>
                     <include>META-INF/services/io.dekorate.Generator</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
