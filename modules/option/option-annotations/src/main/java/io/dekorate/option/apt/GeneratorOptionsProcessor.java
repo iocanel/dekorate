@@ -22,12 +22,8 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.WithSession;
-import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.doc.Description;
-import io.dekorate.option.adapter.GeneratorConfigAdapter;
 import io.dekorate.option.annotation.GeneratorOptions;
-import io.dekorate.option.config.GeneratorConfig;
 import io.dekorate.option.generator.OptionsGenerator;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
@@ -39,13 +35,7 @@ import io.dekorate.processor.AbstractAnnotationProcessor;
   "io.dekorate.knative.annotation.KnativeApplication",
   "io.dekorate.option.annotation.GeneratorOptions"
 })
-public class GeneratorOptionsProcessor extends AbstractAnnotationProcessor implements OptionsGenerator, WithSession {
-
-  private static final String INPUT_DIR = "dekorate.input.dir";
-  private static final String OUTPUT_DIR = "dekorate.output.dir";
-
-  private static final String FALLBACK_INPUT_DIR = "META-INF/fabric8";
-  private static final String FALLBACK_OUTPUT_DIR = "META-INF/fabric8";
+public class GeneratorOptionsProcessor extends AbstractAnnotationProcessor implements OptionsGenerator  {
 
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     if (roundEnv.processingOver()) {
@@ -66,13 +56,4 @@ public class GeneratorOptionsProcessor extends AbstractAnnotationProcessor imple
     }
     return false;
   }
-
- 
-    public void add(Element element) {
-        GeneratorOptions options = element.getAnnotation(GeneratorOptions.class);
-        if (options != null) {
-            AnnotationConfiguration<GeneratorConfig> config = new AnnotationConfiguration<>(GeneratorConfigAdapter.newBuilder(options));
-            on(config);
-        }
-    }
 }

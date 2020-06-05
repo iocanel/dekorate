@@ -17,17 +17,38 @@ limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>dekorate-project</artifactId>
+    <artifactId>option</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>dekorate-core</artifactId>
-  <packaging>jar</packaging>
-  <name>Dekorate :: Core</name>
+  <groupId>io.dekorate</groupId>
+  <artifactId>dekorate-option</artifactId>
+  <name>Dekorate :: Modules :: Option :: Dekorate Option</name>
 
   <dependencies>
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-core</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-docker</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.sundr</groupId>
+      <artifactId>builder-annotations</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
     <dependency>
       <groupId>io.fabric8</groupId>
       <artifactId>kubernetes-client</artifactId>
@@ -40,6 +61,7 @@ limitations under the License.
       <artifactId>commons-compress</artifactId>
       <optional>true</optional>
     </dependency>
+
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
@@ -52,12 +74,14 @@ limitations under the License.
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.dataformat</groupId>
       <artifactId>jackson-dataformat-properties</artifactId>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
@@ -72,31 +96,10 @@ limitations under the License.
       <optional>true</optional>
     </dependency>
  
-    <dependency>
-      <groupId>io.sundr</groupId>
-      <artifactId>transform-annotations</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-
-    <dependency>
-      <groupId>io.sundr</groupId>
-      <artifactId>builder-annotations</artifactId>
-      <scope>compile</scope>
-      <optional>true</optional>
-    </dependency>
-
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>${version.junit-jupiter}</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- this dependency is needed to create parameterized tests -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
       <version>${version.junit-jupiter}</version>
       <scope>test</scope>
     </dependency>
@@ -107,17 +110,28 @@ limitations under the License.
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>${version.junit-platform}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-runner</artifactId>
+      <version>${version.junit-platform}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>${version.assertj}</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
     <plugins>
-       <plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${version.maven-compiler-plugin}</version>
         <configuration>
@@ -125,142 +139,122 @@ limitations under the License.
           <target>${java.target}</target>
           <annotationProcessors>
             <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-            <processor>io.sundr.transform.internal.VelocityTransformationProcessor</processor>
           </annotationProcessors>
         </configuration>
       </plugin>
-       <plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>copy-files</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target name="copy annotation to annotations module">
+                <copydir src="src/main/java/io/dekorate/option/annotation/" includes="**.java" dest="../option-annotations/src/main/java/io/dekorate/option/annotation/" />
+              </target>
+            </configuration>                       
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>${version.maven-shade-plugin}</version>
         <executions>
           <execution>
-            <id>annotation</id>
+            <id>jar</id>
             <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
             <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>annotations</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/kubernetes/annotation/**</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>processor</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>processors</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/*</include>
-                    <include>io/dekorate/adapter/**</include>
-                    <include>io/dekorate/apt/**</include>
-                    <include>io/dekorate/annotation/**</include>
-                    <include>io/dekorate/config/**</include>
-                    <include>io/dekorate/doc/**</include>
-                    <include>io/dekorate/hook/**</include>
-                    <include>io/dekorate/kubernetes/**</include>
-                    <include>io/dekorate/logger/**</include>
-                    <include>io/dekorate/processor/**</include>
-                    <include>io/dekorate/project/**</include>
-                    <include>io/dekorate/utils/**</include>
-                    <include>META-INF/services/*</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/*</include>
-                    <include>io/dekorate/adapter/**</include>
-                    <include>io/dekorate/annotation/**</include>
-                    <include>io/dekorate/config/**</include>
-                    <include>io/dekorate/doc/**</include>
-                    <include>io/dekorate/hook/**</include>
-                    <include>io/dekorate/kubernetes/**</include>
-                    <include>io/dekorate/logger/**</include>
-                    <include>io/dekorate/processor/**</include>
-                    <include>io/dekorate/project/**</include>
-                    <include>io/dekorate/utils/**</include>
-                    <include>META-INF/services/io.dekorate.*</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>relocation</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>nodeps</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/*</include>
-                    <include>io/dekorate/adapter/**</include>
-                    <include>io/dekorate/apt/**</include>
-                    <include>io/dekorate/annotation/**</include>
-                    <include>io/dekorate/config/**</include>
-                    <include>io/dekorate/doc/**</include>
-                    <include>io/dekorate/hook/**</include>
-                    <include>io/dekorate/kubernetes/**</include>
-                    <include>io/dekorate/logger/**</include>
-                    <include>io/dekorate/processor/**</include>
-                    <include>io/dekorate/project/**</include>
-                    <include>io/dekorate/utils/**</include>
-                    <include>META-INF/services/*</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                  <excludes>
-                    <exclude>META-INF/jandex.idx</exclude>
-                  </excludes>
-                </filter>
-              </filters>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
               <artifactSet>
                 <includes>
-                  <include>io.dekorate:dekorate-core</include>
+                  <include>io.dekorate:dekorate-option</include>
                 </includes>
               </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>io.dekorate:dekorate-option</artifact>
+                  <includes>
+                    <include>io/dekorate/option/adapter/**</include>
+                    <include>io/dekorate/option/config/**</include>
+                    <include>io/dekorate/option/configurator/**</include>
+                    <include>io/dekorate/option/generator/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                    <include>META-INF/services/*</include>
+                  </includes>
+                </filter>
+              </filters>
+            </configuration>
+          </execution>
+          <execution>
+            <id>nodeps</id>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+                  <addClasspath>true</addClasspath>
+                </manifest>
+              </archive>
+              <shadedArtifactAttached>true</shadedArtifactAttached>
+              <shadedClassifierName>nodeps</shadedClassifierName>
+              <artifactSet>
+                <includes>
+                  <include>io.dekorate:dekorate-option</include>
+                </includes>
+              </artifactSet>
+              <filters>
+                <filter>
+                  <artifact>io.dekorate:dekorate-option</artifact>
+                  <includes>
+                    <include>io/dekorate/option/adapter/**</include>
+                    <include>io/dekorate/option/config/**</include>
+                    <include>io/dekorate/option/configurator/**</include>
+                    <include>io/dekorate/option/generator/**</include>
+                    <include>META-INF/MANIFEST.MF</include>
+                    <include>META-INF/services/*</include>
+                  </includes>
+                </filter>
+              </filters>
               <relocations>
                 <relocation>
-                  <pattern>io.fabric8.kubernetes</pattern>
-                  <shadedPattern>io.dekorate.deps.kubernetes</shadedPattern>
+                  <pattern>io.fabric8.option</pattern>
+                  <shadedPattern>io.dekorate.deps.option</shadedPattern>
                 </relocation>
+                <relocation>
+                  <pattern>io.fabric8.openshift</pattern>
+                  <shadedPattern>io.fabric8.openshift</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.knative</pattern>
+                  <shadedPattern>io.fabric8.knative</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.tekton</pattern>
+                  <shadedPattern>io.fabric8.tekton</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>io.fabric8.servicecatalog</pattern>
+                  <shadedPattern>io.dekorate.deps.servicecatalog</shadedPattern>
+                </relocation>
+                 <relocation>
+                    <pattern>me.snowdrop.applicationcrd</pattern>
+                    <shadedPattern>io.dekorate.deps.applicationcrd</shadedPattern>
+                 </relocation>
                 <relocation>
                   <pattern>io.fabric8.zjsonpatch</pattern>
                   <shadedPattern>io.dekorate.deps.zjsonpatch</shadedPattern>
@@ -301,6 +295,6 @@ limitations under the License.
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
 </project>

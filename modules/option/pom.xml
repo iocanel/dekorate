@@ -12,6 +12,7 @@
   <name>Dekorate :: Modules :: Option</name>
 
   <modules>
+    <module>dekorate-option</module>
     <module>option-annotations</module>
   </modules>
 
