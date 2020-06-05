@@ -15,8 +15,9 @@
  */
 package io.dekorate.application.apt;
 
-import io.dekorate.application.generator.ApplicationResourceGenerator;
+import io.dekorate.application.annotation.EnableApplicationResource;
 import io.dekorate.processor.AbstractAnnotationProcessor;
+import io.dekorate.utils.Maps;
 import io.sundr.codegen.CodegenContext;
 
 import javax.annotation.processing.RoundEnvironment;
@@ -29,7 +30,7 @@ import java.util.Set;
 
 @SupportedAnnotationTypes({"io.dekorate.application.annotation.ApplicationInfo"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class ApplicationInfoAnnotationProcessor extends AbstractAnnotationProcessor implements ApplicationResourceGenerator {
+public class ApplicationInfoAnnotationProcessor extends AbstractAnnotationProcessor  {
 
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     if  (roundEnv.processingOver()) {
@@ -39,7 +40,8 @@ public class ApplicationInfoAnnotationProcessor extends AbstractAnnotationProces
     CodegenContext.create(processingEnv.getElementUtils(), processingEnv.getTypeUtils());
     for (TypeElement typeElement : annotations) {
       for (Element mainClass : roundEnv.getElementsAnnotatedWith(typeElement)) {
-        add(mainClass);
+         EnableApplicationResource info = mainClass.getAnnotation(EnableApplicationResource.class);
+         getSession().addAnnotationConfiguration(Maps.fromAnnotation("application", info, EnableApplicationResource.class));
       }
     }
     return false;

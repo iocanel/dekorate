@@ -15,9 +15,9 @@
  */
 package io.dekorate.application.decorator;
 
-import io.dekorate.deps.applicationcrd.api.model.ApplicationSpecBuilder;
-import io.dekorate.deps.applicationcrd.api.model.GroupKind;
-import io.dekorate.deps.applicationcrd.api.model.GroupKindBuilder;
+import me.snowdrop.applicationcrd.api.model.ApplicationSpecBuilder;
+import me.snowdrop.applicationcrd.api.model.GroupKind;
+import me.snowdrop.applicationcrd.api.model.GroupKindBuilder;
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.dekorate.doc.Description;

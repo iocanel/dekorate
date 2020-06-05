@@ -20,28 +20,35 @@ import io.dekorate.Session;
 import io.dekorate.WithSession;
 import io.dekorate.application.adapter.ApplicationConfigAdapter;
 import io.dekorate.application.annotation.EnableApplicationResource;
+import io.dekorate.application.config.ApplicationConfig;
 import io.dekorate.application.config.ApplicationConfigBuilder;
 import io.dekorate.application.handler.ApplicationHandler;
 import io.dekorate.config.ConfigurationSupplier;
 import io.dekorate.config.AnnotationConfiguration;
+import io.dekorate.config.PropertyConfiguration;
 
 import javax.lang.model.element.Element;
 import java.util.Map;
 
 public interface ApplicationResourceGenerator extends Generator, WithSession {
 
-  @Override
-  default void add(Map map) {
+  String KEY = "application";
+
+  default String getKey() {
+    return KEY;
   }
 
   @Override
-  default void add(Element element) {
-    EnableApplicationResource info = element.getAnnotation(EnableApplicationResource.class);
-    ApplicationConfigBuilder builder = ApplicationConfigAdapter.newBuilder(info);
-    add(new AnnotationConfiguration<>(builder));
+  default void addPropertyConfiguration(Map map) {
+    on(new PropertyConfiguration(ApplicationConfigAdapter.newBuilder(propertiesMap(map, ApplicationConfig.class))));
   }
 
-  default void add(ConfigurationSupplier<?> config) {
+  @Override
+  default void addAnnotationConfiguration(Map map) {
+    on(new AnnotationConfiguration(ApplicationConfigAdapter.newBuilder(propertiesMap(map, ApplicationConfig.class))));
+  }
+
+  default void on(ConfigurationSupplier<?> config) {
     Session session = getSession();
     session.configurators().add(config);
     session.handlers().add(new ApplicationHandler(session.resources()));

@@ -55,6 +55,7 @@
     <!-- Dependencies -->
     <version.sundrio>0.21.0</version.sundrio>
     <version.kubernetes-client>4.9.1</version.kubernetes-client>
+    <version.application-crd-client>1.1.1</version.application-crd-client>
 
     <version.commons-codec>1.10</version.commons-codec>
     <version.commons-compress>1.18</version.commons-compress>
