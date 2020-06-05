@@ -24,7 +24,7 @@ import io.fabric8.kubernetes.client.Watcher;
 import io.dekorate.prometheus.client.dsl.internal.ServiceMonitorOperationsImpl;
 
 import io.fabric8.kubernetes.client.dsl.base.OperationContext;
-import io.dekorate.deps.okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 import io.dekorate.prometheus.model.ServiceMonitor;
 import io.dekorate.prometheus.model.ServiceMonitorBuilder;

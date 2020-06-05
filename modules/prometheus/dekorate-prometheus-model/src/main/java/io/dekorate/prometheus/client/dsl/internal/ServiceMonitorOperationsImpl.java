@@ -22,7 +22,7 @@ import io.fabric8.kubernetes.client.dsl.NonNamespaceOperation;
 import io.fabric8.kubernetes.client.utils.ApiVersionUtil;
 import io.fabric8.kubernetes.client.dsl.base.OperationContext;
 
-import io.dekorate.deps.okhttp3.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 import io.dekorate.prometheus.model.DoneableServiceMonitor;
 import io.dekorate.prometheus.model.ServiceMonitor;

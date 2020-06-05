@@ -23,13 +23,17 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
+
+import io.dekorate.config.AnnotationConfiguration;
 import io.dekorate.processor.AbstractAnnotationProcessor;
+import io.dekorate.prometheus.adapter.ServiceMonitorConfigAdapter;
 import io.dekorate.prometheus.annotation.EnableServiceMonitor;
-import io.dekorate.utils.Maps;
+import io.dekorate.prometheus.config.ServiceMonitorConfigBuilder;
+import io.dekorate.prometheus.generator.ServiceMonitorGenerator;
 
 @SupportedAnnotationTypes({"io.dekorate.prometheus.annotation.EnableServiceMonitor"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class ServiceMonitorAnnotationProcessor extends AbstractAnnotationProcessor {
+public class ServiceMonitorAnnotationProcessor extends AbstractAnnotationProcessor implements ServiceMonitorGenerator {
 
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     if (roundEnv.processingOver()) {
@@ -38,10 +42,16 @@ public class ServiceMonitorAnnotationProcessor extends AbstractAnnotationProcess
     }
     for (TypeElement typeElement : annotations) {
       for (Element mainClass : roundEnv.getElementsAnnotatedWith(typeElement)) {
-        EnableServiceMonitor serviceMonitor = mainClass.getAnnotation(EnableServiceMonitor.class);
-        getSession().addAnnotationConfiguration(Maps.fromAnnotation("prometheus-service-monitor", serviceMonitor, EnableServiceMonitor.class));
+        add(mainClass);
       }
     }
     return false;
+  }
+
+  public void add(Element element) {
+    EnableServiceMonitor serviceMonitor = element.getAnnotation(EnableServiceMonitor.class);
+    on(serviceMonitor != null
+      ? new AnnotationConfiguration<>(ServiceMonitorConfigAdapter.newBuilder(serviceMonitor))
+      : new AnnotationConfiguration<>(new ServiceMonitorConfigBuilder()));
   }
 }

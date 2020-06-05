@@ -15,11 +15,10 @@
  */
 package io.dekorate.prometheus.model;
 
-import io.dekorate.deps.jackson.annotation.JsonInclude;
-import io.dekorate.deps.jackson.annotation.JsonProperty;
-import io.dekorate.deps.jackson.annotation.JsonPropertyOrder;
-import io.dekorate.deps.jackson.databind.annotation.JsonDeserialize;
-import io.dekorate.deps.javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.fabric8.kubernetes.api.model.Doneable;
 import io.fabric8.kubernetes.api.model.HasMetadata;
 import io.fabric8.kubernetes.api.model.LabelSelector;
@@ -38,7 +37,7 @@ import java.util.Map;
       "metadata",
       "spec",
       })
-      @JsonDeserialize(using = io.dekorate.deps.jackson.databind.JsonDeserializer.None.class)
+      @JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None.class)
 @Buildable(editableEnabled = false, validationEnabled = false, generateBuilderPackage = false, builderPackage = "io.fabric8.kubernetes.api.builder", inline = @Inline(type = Doneable.class, prefix = "Doneable", value = "done"), refs = {@BuildableReference(ObjectMeta.class), @BuildableReference(LabelSelector.class)})
 public class ServiceMonitor implements HasMetadata {
 
@@ -47,7 +46,6 @@ public class ServiceMonitor implements HasMetadata {
    * (Required)
    *
    */
-  @NotNull
   @JsonProperty("apiVersion")
   private String apiVersion = "monitoring.coreos.com/v1";
   /**
@@ -55,7 +53,6 @@ public class ServiceMonitor implements HasMetadata {
    * (Required)
    *
    */
-  @NotNull
   @JsonProperty("kind")
   private String kind = "ServiceMonitor";
   /**

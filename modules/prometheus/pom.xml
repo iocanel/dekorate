@@ -12,6 +12,8 @@
   <name>Dekorate :: Modules :: Prometheus</name>
 
   <modules>
+    <module>dekorate-prometheus</module>
+    <module>dekorate-prometheus-model</module>
     <module>prometheus-annotations</module>
   </modules>
 

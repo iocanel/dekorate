@@ -15,15 +15,13 @@
  */
 package io.dekorate.prometheus.model;
 
-import io.dekorate.deps.jackson.annotation.JsonIgnore;
-import io.dekorate.deps.jackson.annotation.JsonInclude;
-import io.dekorate.deps.jackson.annotation.JsonProperty;
-import io.dekorate.deps.jackson.annotation.JsonPropertyOrder;
-import io.dekorate.deps.jackson.annotation.ObjectIdGenerators;
-import io.dekorate.deps.jackson.databind.JsonDeserializer;
-import io.dekorate.deps.jackson.databind.annotation.JsonDeserialize;
-import io.dekorate.deps.javax.validation.Valid;
-import io.dekorate.deps.javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.fabric8.kubernetes.api.model.KubernetesResource;
 import io.fabric8.kubernetes.api.model.KubernetesResourceList;
 import io.fabric8.kubernetes.api.model.ListMeta;
@@ -41,17 +39,13 @@ import java.util.Objects;
 )
 public class ServiceMonitorList implements KubernetesResource, KubernetesResourceList {
 
-    @NotNull
     @JsonProperty("apiVersion")
     private String apiVersion = "app.k8s.io/v1beta1";
     @JsonProperty("items")
-    @Valid
     private List<ServiceMonitor> items = new ArrayList();
-    @NotNull
     @JsonProperty("kind")
     private String kind = "ServiceMonitorList";
     @JsonProperty("metadata")
-    @Valid
     private ListMeta metadata;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap();

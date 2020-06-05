@@ -35,7 +35,7 @@ import io.dekorate.prometheus.handler.ServiceMonitorHandler;
 public interface ServiceMonitorGenerator extends Generator, WithSession {
 
   default String getKey() {
-    return "servicemonitor";
+    return "prometheus-service-monitor";
   }
 
   default Class<? extends Configuration> getConfigType() {
@@ -43,7 +43,12 @@ public interface ServiceMonitorGenerator extends Generator, WithSession {
   }
 
   @Override
-  default void add(Map map) {
+  default void addAnnotationConfiguration(Map map) {
+    on(new AnnotationConfiguration<>(ServiceMonitorConfigAdapter.newBuilder(propertiesMap(map, ServiceMonitorConfig.class))));
+  }
+
+  @Override
+  default void addPropertyConfiguration(Map map) {
     on(new PropertyConfiguration<>(ServiceMonitorConfigAdapter.newBuilder(propertiesMap(map, ServiceMonitorConfig.class))));
   }
 

@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <parent>
-    <artifactId>annotations</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <parent>
+    <artifactId>prometheus</artifactId>
     <groupId>io.dekorate</groupId>
     <version>2.0-SNAPSHOT</version>
   </parent>
@@ -9,14 +8,36 @@
 
   <groupId>io.dekorate</groupId>
   <artifactId>prometheus-annotations</artifactId>
-
- <name>Dekorate :: Annotations :: Prometheus</name>
+  <name>Dekorate :: Modules :: Prometheus :: Prometheus Annotations</name>
+  <packaging>jar</packaging>
 
   <dependencies>
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>dekorate-core</artifactId>
       <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-prometheus-model</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-prometheus</artifactId>
+      <version>${project.version}</version>
+      <classifier>nodeps</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>dekorate-dependencies</artifactId>
+      <version>${project.version}</version>
+      <scope>compile</scope>
     </dependency>
 
     <dependency>
@@ -25,6 +46,35 @@
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+     <!-- Serialization  -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-properties</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
     <!-- Testing -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -60,9 +110,7 @@
         <configuration>
           <source>${java.source}</source>
           <target>${java.target}</target>
-          <annotationProcessors>
-            <processor>io.sundr.builder.internal.processor.BuildableProcessor</processor>
-          </annotationProcessors>
+          <compilerArgument>-proc:none</compilerArgument>
         </configuration>
       </plugin>
       <plugin>
@@ -103,39 +151,8 @@
                 <filter>
                   <artifact>*:*</artifact>
                   <includes>
-                    <include>io/dekorate/prometheus/adapter/**</include>
                     <include>io/dekorate/prometheus/apt/**</include>
-                    <include>io/dekorate/prometheus/config/**</include>
-                    <include>io/dekorate/prometheus/generator/**</include>
-                    <include>io/dekorate/prometheus/handler/**</include>
-                    <include>io/dekorate/prometheus/model/**</include>
-                    <include>META-INF/services/javax.annotation.processing.Processor</include>
-                    <include>META-INF/MANIFEST.MF</include>
-                  </includes>
-                </filter>
-              </filters>
-            </configuration>
-          </execution>
-          <execution>
-            <id>noapt</id>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <configuration>
-              <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>noapt</shadedClassifierName>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <includes>
-                    <include>io/dekorate/prometheus/adapter/**</include>
-                    <include>io/dekorate/prometheus/annotation/**</include>
-                    <include>io/dekorate/prometheus/config/**</include>
-                    <include>io/dekorate/prometheus/generator/**</include>
-                    <include>io/dekorate/prometheus/handler/**</include>
-                    <include>io/dekorate/prometheus/model/**</include>
-                    <include>META-INF/services/io.dekorate.Generator</include>
+                    <include>META-INF/services/*</include>
                     <include>META-INF/MANIFEST.MF</include>
                   </includes>
                 </filter>
@@ -144,7 +161,6 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+   </plugins>
   </build>
-
 </project>
