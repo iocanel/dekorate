@@ -138,7 +138,7 @@ public class Maps {
         Object value = m.invoke(annotation);
         if (m.getReturnType().isPrimitive() || m.getReturnType().isEnum()) {
 
-          result.put(m.getName(), m.invoke(annotation));
+          result.put(m.getName(), String.valueOf(m.invoke(annotation)));
         } else if (m.getReturnType().isAnnotation()) {
           if (value instanceof Object[]) {
             List<Map<String, Object>> maps = new ArrayList<>();

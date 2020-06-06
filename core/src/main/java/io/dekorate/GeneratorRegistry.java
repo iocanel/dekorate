@@ -19,17 +19,30 @@ package io.dekorate;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.ServiceConfigurationError;
 import java.util.ServiceLoader;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GeneratorRegistry {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger();
+
   private static final Set<Generator> registry = new HashSet<>();
   private static final Set<String> blacklist = new HashSet<>();
 
-  static {
-    ServiceLoader.load(Generator.class, GeneratorRegistry.class.getClassLoader()).forEach(b -> registry.add(b));
+static {
+    ServiceLoader<Generator> loader = ServiceLoader.load(Generator.class, GeneratorRegistry.class.getClassLoader()); 
+    Iterator<Generator> iterator = loader.iterator();
+    while (iterator.hasNext()) {
+      //TODO: This is needed to support dekorate-halkyon that is internally using dekorate to generate crds (inception kind of thing).
+      try {
+        register(iterator.next());
+      } catch (ServiceConfigurationError e) {
+        LOGGER.warning(e.getMessage());
+      }
+    }
   }
 
   public static Set<Generator> getGenerators() {
