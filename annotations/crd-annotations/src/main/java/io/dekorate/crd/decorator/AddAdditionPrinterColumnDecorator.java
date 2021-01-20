@@ -19,8 +19,8 @@ package io.dekorate.crd.decorator;
 
 import io.dekorate.utils.Strings;
 import io.dekorate.deps.kubernetes.api.builder.Predicate;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceColumnDefinitionBuilder;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersionFluent;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceColumnDefinitionBuilder;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersionFluent;
 
 public class AddAdditionPrinterColumnDecorator extends CustomResourceDefinitionVersionDecorator<CustomResourceDefinitionVersionFluent<?>> {
 

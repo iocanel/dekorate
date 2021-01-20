@@ -53,7 +53,6 @@ import io.dekorate.crd.visitor.SpecReplicasPathDetector;
 import io.dekorate.crd.visitor.StatusReplicasPathDetector;
 import io.dekorate.kubernetes.config.Configuration;
 import io.dekorate.utils.Strings;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionBuilder;
 import io.sundr.codegen.CodegenContext;
 import io.sundr.codegen.functions.ElementTo;
 import io.sundr.codegen.model.ClassRef;
@@ -61,6 +60,7 @@ import io.sundr.codegen.model.Property;
 import io.sundr.codegen.model.TypeDef;
 import io.sundr.codegen.model.TypeDefBuilder;
 import io.sundr.codegen.model.TypeRef;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionBuilder;
 
 public class CustomResourceHandler implements Handler<CustomResourceConfig> {
 

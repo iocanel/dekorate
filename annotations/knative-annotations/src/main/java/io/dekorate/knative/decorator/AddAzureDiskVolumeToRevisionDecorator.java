@@ -20,6 +20,7 @@ import io.dekorate.kubernetes.config.AzureDiskVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.dekorate.deps.knative.serving.v1.RevisionSpecFluent;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
+import io.dekorate.deps.kubernetes.api.model.VolumeBuilder;
 
 @Description("Add an Azure disk volume to the pod spec.")
 public class AddAzureDiskVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
@@ -37,7 +38,7 @@ public class AddAzureDiskVolumeToRevisionDecorator extends NamedResourceDecorato
 
   @Override
   public void andThenVisit(RevisionSpecFluent<?> revisionSpec, ObjectMeta resourceMeta) {
-    revisionSpec.addNewVolume()
+    revisionSpec.addToVolumes(new VolumeBuilder()
         .withName(volume.getVolumeName())
         .withNewAzureDisk()
         .withKind(volume.getKind())
@@ -47,6 +48,6 @@ public class AddAzureDiskVolumeToRevisionDecorator extends NamedResourceDecorato
         .withCachingMode(volume.getCachingMode())
         .withReadOnly(volume.isReadOnly())
         .endAzureDisk()
-        .endVolume();
+        .build());
   }
 }

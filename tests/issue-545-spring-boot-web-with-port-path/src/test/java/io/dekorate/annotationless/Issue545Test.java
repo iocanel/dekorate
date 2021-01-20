@@ -28,7 +28,7 @@ import io.dekorate.deps.kubernetes.api.model.Container;
 import io.dekorate.deps.kubernetes.api.model.HasMetadata;
 import io.dekorate.deps.kubernetes.api.model.KubernetesList;
 import io.dekorate.deps.kubernetes.api.model.apps.Deployment;
-import io.dekorate.deps.kubernetes.api.model.extensions.Ingress;
+import io.dekorate.deps.kubernetes.api.model.networking.v1.Ingress;
 
 public class Issue545Test {
 
@@ -42,7 +42,8 @@ public class Issue545Test {
     assertNotNull(c);
     assertTrue(c.getPorts().stream().filter(p -> "http".equals(p.getName())).findAny().isPresent());
     Ingress i = findFirst(list, Ingress.class).orElseThrow(() -> new IllegalStateException());
-    assertTrue(i.getSpec().getRules().stream().flatMap(r -> r.getHttp().getPaths().stream()).anyMatch(p -> p.getPath().equals("/app")));
+    assertTrue(i.getSpec().getRules().stream().flatMap(r -> r.getHttp().getPaths().stream())
+        .anyMatch(p -> p.getPath().equals("/app")));
   }
 
   <T extends HasMetadata> Optional<T> findFirst(KubernetesList list, Class<T> t) {

@@ -22,9 +22,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import io.dekorate.kubernetes.decorator.Decorator;
 import io.dekorate.deps.kubernetes.api.builder.Predicate;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionSpecFluent;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersion;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersionBuilder;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionSpecFluent;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersion;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersionBuilder;
 
 public class EnsureSingleStorageVersionDecorator extends CustomResourceDefinitionDecorator<CustomResourceDefinitionSpecFluent<?>> {
 

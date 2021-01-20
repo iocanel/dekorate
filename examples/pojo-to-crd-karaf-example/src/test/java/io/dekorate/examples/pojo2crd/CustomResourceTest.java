@@ -26,8 +26,8 @@ import org.junit.jupiter.api.Test;
 import io.dekorate.utils.Serialization;
 import io.dekorate.deps.kubernetes.api.model.HasMetadata;
 import io.dekorate.deps.kubernetes.api.model.KubernetesList;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinition;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersion;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinition;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersion;
 
 class CustomResourceTest {
 

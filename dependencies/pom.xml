@@ -73,6 +73,22 @@
 
     <dependency>
       <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model-core</artifactId>
+       <version>${version.kubernetes-client}</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
+      <artifactId>kubernetes-model-common</artifactId>
+       <version>${version.kubernetes-client}</version>
+      <scope>compile</scope>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.fabric8</groupId>
       <artifactId>kubernetes-client</artifactId>
       <version>${version.kubernetes-client}</version>
       <scope>compile</scope>
@@ -209,11 +225,39 @@
                 <includes>
                   <include>io.fabric8:zjsonpatch</include>
                   <include>io.fabric8:kubernetes-model</include>
+                  <include>io.fabric8:kubernetes-model-admissionregistration</include>
+                  <include>io.fabric8:kubernetes-model-apiextensions</include>
+                  <include>io.fabric8:kubernetes-model-apps</include>
+                  <include>io.fabric8:kubernetes-model-autoscaling</include>
+                  <include>io.fabric8:kubernetes-model-certificates</include>
+                  <include>io.fabric8:kubernetes-model-coordination</include>
+                  <include>io.fabric8:kubernetes-model-core</include>
+                  <include>io.fabric8:kubernetes-model-common</include>
+                  <include>io.fabric8:kubernetes-model-batch</include>
+                  <include>io.fabric8:kubernetes-model-discovery</include>
+                  <include>io.fabric8:kubernetes-model-events</include>
+                  <include>io.fabric8:kubernetes-model-extensions</include>
+                  <include>io.fabric8:kubernetes-model-metrics</include>
+                  <include>io.fabric8:kubernetes-model-networking</include>
+                  <include>io.fabric8:kubernetes-model-node</include>
+                  <include>io.fabric8:kubernetes-model-policy</include>
+                  <include>io.fabric8:kubernetes-model-settings</include>
+                  <include>io.fabric8:kubernetes-model-scheduling</include>
+                  <include>io.fabric8:kubernetes-model-storageclass</include>
+                  <include>io.fabric8:kubernetes-model-rbac</include>
+                  <include>io.fabric8:openshift-model</include>
+                  <include>io.fabric8:openshift-model-console</include>
+                  <include>io.fabric8:openshift-model-monitoring</include>
+                  <include>io.fabric8:openshift-model-operator</include>
+                  <include>io.fabric8:openshift-model-operatorhub</include>
                   <include>io.fabric8:kubernetes-client</include>
                   <include>io.fabric8:openshift-client</include>
                   <include>io.fabric8:knative-model</include>
                   <include>io.fabric8:knative-client</include>
                   <include>io.fabric8:tekton-model</include>
+                  <include>io.fabric8:tekton-model-v1alpha1</include>
+                  <include>io.fabric8:tekton-model-v1beta1</include>
+                  <include>io.fabric8:tekton-model-triggers</include>
                   <include>io.fabric8:tekton-client</include>
                   <include>io.fabric8:servicecatalog-model</include>
                   <include>io.fabric8:servicecatalog-client</include>

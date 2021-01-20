@@ -17,7 +17,7 @@
 
 package io.dekorate.crd.decorator;
 
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersionFluent;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersionFluent;
 
 public class SetServedVersionDecorator extends CustomResourceDefinitionVersionDecorator<CustomResourceDefinitionVersionFluent<?>> {
 

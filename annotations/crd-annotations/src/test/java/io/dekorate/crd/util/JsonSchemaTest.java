@@ -23,7 +23,7 @@ import io.sundr.codegen.functions.ClassTo;
 import io.sundr.codegen.model.TypeDef;
 import io.dekorate.crd.examples.person.Person;
 import io.dekorate.utils.Serialization;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.JSONSchemaProps;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.JSONSchemaProps;
 
 
 class JsonSchemaTest {

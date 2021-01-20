@@ -20,6 +20,7 @@ import io.dekorate.kubernetes.config.AwsElasticBlockStoreVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.dekorate.deps.knative.serving.v1.RevisionSpecFluent;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
+import io.dekorate.deps.kubernetes.api.model.VolumeBuilder;
 
 @Description("Add an elastic block store volume to the pod spec.")
 public class AddAwsElasticBlockStoreVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
@@ -37,7 +38,7 @@ public class AddAwsElasticBlockStoreVolumeToRevisionDecorator extends NamedResou
 
   @Override
   public void andThenVisit(RevisionSpecFluent<?> revisionSpec, ObjectMeta resourceMeta) {
-    revisionSpec.addNewVolume()
+    revisionSpec.addToVolumes(new VolumeBuilder()
         .withName(volume.getVolumeName())
         .withNewAwsElasticBlockStore()
         .withVolumeID(volume.getVolumeId())
@@ -45,7 +46,7 @@ public class AddAwsElasticBlockStoreVolumeToRevisionDecorator extends NamedResou
         .withPartition(volume.getPartition())
         .withReadOnly(volume.isReadOnly())
         .endAwsElasticBlockStore()
-        .endVolume();
+        .build());
   }
 
 	

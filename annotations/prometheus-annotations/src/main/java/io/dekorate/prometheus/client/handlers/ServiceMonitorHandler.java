@@ -17,6 +17,8 @@ package io.dekorate.prometheus.client.handlers;
 
 import java.util.function.Predicate;
 
+import io.dekorate.deps.kubernetes.api.model.ListOptions;
+import io.dekorate.deps.kubernetes.api.model.DeletionPropagation;
 import io.dekorate.deps.kubernetes.client.Config;
 import io.dekorate.deps.kubernetes.client.ResourceHandler;
 import io.dekorate.deps.kubernetes.client.Watch;
@@ -65,12 +67,8 @@ public class ServiceMonitorHandler implements ResourceHandler<ServiceMonitor, Se
   }
 
   @Override
-  public Boolean delete(OkHttpClient client, Config config, String namespace, Boolean cascading, ServiceMonitor item) {
-    if (cascading) {
-      return new ServiceMonitorOperationsImpl(client, config).withItem(item).cascading(cascading).delete();
-    } else {
-      return new ServiceMonitorOperationsImpl(client, config).withItem(item).inNamespace(namespace).delete(item);
-    }
+  public Boolean delete(OkHttpClient client, Config config, String namespace, DeletionPropagation propagationPolicy, ServiceMonitor item) {
+      return new ServiceMonitorOperationsImpl(client, config).withItem(item).withPropagationPolicy(propagationPolicy).delete();
   }
 
   @Override
@@ -81,6 +79,11 @@ public class ServiceMonitorHandler implements ResourceHandler<ServiceMonitor, Se
   @Override
   public Watch watch(OkHttpClient client, Config config, String namespace, ServiceMonitor item, String resourceVersion, Watcher<ServiceMonitor> watcher) {
     return new ServiceMonitorOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).watch(resourceVersion, watcher);
+  }
+
+  @Override
+  public Watch watch(OkHttpClient client, Config config, String namespace, ServiceMonitor item, ListOptions listOptions, Watcher<ServiceMonitor> watcher) {
+    return new ServiceMonitorOperationsImpl(client, config).withItem(item).inNamespace(namespace).withName(item.getMetadata().getName()).watch(listOptions, watcher);
   }
 
   @Override

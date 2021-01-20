@@ -28,7 +28,7 @@ import io.dekorate.utils.Strings;
 import io.dekorate.deps.kubernetes.api.builder.TypedVisitor;
 import io.dekorate.deps.kubernetes.api.builder.VisitableBuilder;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceDefinitionVersionBuilder;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceDefinitionVersionBuilder;
 
 public abstract class CustomResourceDefinitionVersionDecorator<T> extends Decorator<VisitableBuilder> {
 

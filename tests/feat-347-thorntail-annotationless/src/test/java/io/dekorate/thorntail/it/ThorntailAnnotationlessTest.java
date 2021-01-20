@@ -17,7 +17,7 @@ package io.dekorate.thorntail.it;
 
 import io.dekorate.deps.kubernetes.api.model.HasMetadata;
 import io.dekorate.deps.kubernetes.api.model.KubernetesList;
-import io.dekorate.deps.kubernetes.api.model.extensions.Ingress;
+import io.dekorate.deps.kubernetes.api.model.networking.v1.Ingress;
 import io.dekorate.deps.openshift.api.model.Route;
 import io.dekorate.utils.Serialization;
 import org.junit.jupiter.api.Test;
@@ -37,7 +37,7 @@ class ThorntailAnnotationlessTest {
 
     Optional<Ingress> ingress = findFirst(list, Ingress.class);
     assertTrue(ingress.isPresent());
-    assertEquals(9090, ingress.get().getSpec().getRules().get(0).getHttp().getPaths().get(0).getBackend().getServicePort().getIntVal().intValue());
+    assertEquals(9090, ingress.get().getSpec().getRules().get(0).getHttp().getPaths().get(0).getBackend().getService().getPort().getNumber());
   }
 
   @Test

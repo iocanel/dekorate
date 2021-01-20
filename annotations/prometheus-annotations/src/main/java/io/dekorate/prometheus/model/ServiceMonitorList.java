@@ -39,7 +39,7 @@ import java.util.Objects;
 @JsonDeserialize(
     using = JsonDeserializer.None.class
 )
-public class ServiceMonitorList implements KubernetesResource, KubernetesResourceList {
+public class ServiceMonitorList implements KubernetesResource, KubernetesResourceList<ServiceMonitor> {
 
     @NotNull
     @JsonProperty("apiVersion")

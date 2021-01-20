@@ -26,8 +26,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
-import io.dekorate.deps.kubernetes.api.model.apiextensions.JSONSchemaProps;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.JSONSchemaPropsBuilder;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.JSONSchemaProps;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.JSONSchemaPropsBuilder;
 import io.sundr.builder.internal.functions.TypeAs;
 import io.sundr.builder.internal.utils.BuilderUtils;
 import io.sundr.codegen.functions.ClassTo;

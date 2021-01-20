@@ -20,6 +20,7 @@ import io.dekorate.kubernetes.config.PersistentVolumeClaimVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.dekorate.deps.knative.serving.v1.RevisionSpecFluent;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
+import io.dekorate.deps.kubernetes.api.model.VolumeBuilder;
 
 @Description("Add a persistent volume claim volume to all pod specs.")
 public class AddPvcVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
@@ -37,13 +38,12 @@ public class AddPvcVolumeToRevisionDecorator extends NamedResourceDecorator<Revi
 
   @Override
   public void andThenVisit(RevisionSpecFluent<?> revisionSpec, ObjectMeta resourceMeta) {
-    revisionSpec.addNewVolume()
+        revisionSpec.addToVolumes(new VolumeBuilder()
         .withName(volume.getVolumeName())
         .withNewPersistentVolumeClaim()
         .withClaimName(volume.getClaimName())
         .withNewReadOnly(volume.isReadOnly())
         .endPersistentVolumeClaim()
-        .endVolume();
-
+        .build());
   }
 }

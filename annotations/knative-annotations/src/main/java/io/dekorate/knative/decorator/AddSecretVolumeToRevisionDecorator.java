@@ -20,6 +20,8 @@ import io.dekorate.kubernetes.config.SecretVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.dekorate.deps.knative.serving.v1.RevisionSpecFluent;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
+import io.dekorate.deps.kubernetes.api.model.VolumeBuilder;
+
 
 @Description("Add a secret volume to all pod specs.")
 public class AddSecretVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
@@ -37,13 +39,13 @@ public class AddSecretVolumeToRevisionDecorator extends NamedResourceDecorator<R
 
   @Override
   public void andThenVisit(RevisionSpecFluent<?> revisionSpec, ObjectMeta resourceMeta) {
-    revisionSpec.addNewVolume()
+    revisionSpec.addToVolumes(new VolumeBuilder()
         .withName(volume.getVolumeName())
         .withNewSecret()
         .withSecretName(volume.getSecretName())
         .withDefaultMode(volume.getDefaultMode())
         .withOptional(volume.isOptional())
         .endSecret()
-        .endVolume();
+        .build());
   }
 }

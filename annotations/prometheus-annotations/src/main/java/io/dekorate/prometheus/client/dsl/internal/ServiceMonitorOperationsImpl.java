@@ -21,7 +21,6 @@ import io.dekorate.deps.kubernetes.client.dsl.base.HasMetadataOperation;
 import io.dekorate.deps.kubernetes.client.dsl.NonNamespaceOperation;
 import io.dekorate.deps.kubernetes.client.utils.ApiVersionUtil;
 import io.dekorate.deps.kubernetes.client.dsl.base.OperationContext;
-
 import io.dekorate.deps.okhttp3.OkHttpClient;
 
 import io.dekorate.prometheus.model.DoneableServiceMonitor;

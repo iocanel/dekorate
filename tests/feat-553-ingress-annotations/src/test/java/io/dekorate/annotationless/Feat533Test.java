@@ -26,7 +26,7 @@ import io.dekorate.utils.Serialization;
 import io.dekorate.deps.kubernetes.api.model.HasMetadata;
 import io.dekorate.deps.kubernetes.api.model.KubernetesList;
 import io.dekorate.deps.kubernetes.api.model.apps.Deployment;
-import io.dekorate.deps.kubernetes.api.model.extensions.Ingress;
+import io.dekorate.deps.kubernetes.api.model.networking.v1.Ingress;
 
 public class Feat533Test {
 
@@ -38,8 +38,10 @@ public class Feat533Test {
     Deployment d = findFirst(list, Deployment.class).orElseThrow(() -> new IllegalStateException());
     assertNotNull(d);
     assertNull(d.getMetadata().getAnnotations().get("nginx.ingress.kubernetes.io/auth-secret"));
+
     Ingress i = findFirst(list, Ingress.class).orElseThrow(() -> new IllegalStateException());
     assertNotNull(i);
+
     assertEquals("my-secret", i.getMetadata().getAnnotations().get("nginx.ingress.kubernetes.io/auth-secret"));
   }
 

@@ -20,6 +20,7 @@ import io.dekorate.kubernetes.config.AzureFileVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.dekorate.deps.knative.serving.v1.RevisionSpecFluent;
 import io.dekorate.deps.kubernetes.api.model.ObjectMeta;
+import io.dekorate.deps.kubernetes.api.model.VolumeBuilder;
 
 @Description("Add an Azure File volume to the Pod spec.")
 public class AddAzureFileVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
@@ -37,14 +38,13 @@ public class AddAzureFileVolumeToRevisionDecorator extends NamedResourceDecorato
 
   @Override
   public void andThenVisit(RevisionSpecFluent<?> revisionSpec, ObjectMeta resourceMeta) {
-    revisionSpec.addNewVolume()
+    revisionSpec.addToVolumes(new VolumeBuilder()
         .withName(volume.getVolumeName())
         .withNewAzureFile()
         .withSecretName(volume.getSecretName())
         .withShareName(volume.getShareName())
         .withReadOnly(volume.isReadOnly())
         .endAzureFile()
-        .endVolume();
-
+        .build());
   }
 }

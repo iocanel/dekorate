@@ -18,7 +18,7 @@
 package io.dekorate.crd.decorator;
 
 import io.dekorate.kubernetes.decorator.Decorator;
-import io.dekorate.deps.kubernetes.api.model.apiextensions.CustomResourceSubresourcesFluent;
+import io.dekorate.deps.kubernetes.api.model.apiextensions.v1beta1.CustomResourceSubresourcesFluent;
 
 public class AddLabelSelectorPathDecorator extends CustomResourceDefinitionVersionDecorator<CustomResourceSubresourcesFluent<?>> {
 

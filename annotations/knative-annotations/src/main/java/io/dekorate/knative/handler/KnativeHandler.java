@@ -28,6 +28,7 @@ import io.dekorate.config.ConfigurationSupplier;
 import io.dekorate.deps.knative.serving.v1.Service;
 import io.dekorate.deps.knative.serving.v1.ServiceBuilder;
 import io.dekorate.deps.kubernetes.api.model.KubernetesListBuilder;
+import io.dekorate.deps.kubernetes.api.model.ContainerBuilder;
 import io.dekorate.knative.config.HttpTransportVersion;
 import io.dekorate.knative.config.AutoScalerClass;
 import io.dekorate.knative.config.AutoscalingMetric;
@@ -71,6 +72,7 @@ import io.dekorate.kubernetes.configurator.ApplyDeployToApplicationConfiguration
 import io.dekorate.kubernetes.decorator.AddConfigMapDataDecorator;
 import io.dekorate.kubernetes.decorator.AddConfigMapResourceProvidingDecorator;
 import io.dekorate.kubernetes.decorator.AddLabelDecorator;
+import io.dekorate.kubernetes.decorator.AddMountDecorator;
 import io.dekorate.kubernetes.decorator.ApplyPortNameDecorator;
 import io.dekorate.project.ApplyProjectInfo;
 import io.dekorate.project.Project;
@@ -228,6 +230,10 @@ public class KnativeHandler extends AbstractKubernetesHandler<KnativeConfig> imp
     for (HostAlias hostAlias : config.getHostAliases()) {
       resources.decorate(KNATIVE, new AddHostAliasesToRevisionDecorator(hostAlias));
     }
+
+    for (Mount mount: config.getMounts()) {
+      resources.decorate(KNATIVE, new AddMountDecorator(mount));
+    }
     
   }
 
@@ -274,8 +280,8 @@ public class KnativeHandler extends AbstractKubernetesHandler<KnativeConfig> imp
                     imageConfig.getGroup(), imageConfig.getName(), imageConfig.getVersion());
 
     return new ServiceBuilder().withNewMetadata().withName(config.getName())
-        .endMetadata().withNewSpec().withNewTemplate().withNewSpec().addNewContainer().withName(config.getName())
-        .withImage(image).endContainer().endSpec().endTemplate().endSpec().build();
+      .endMetadata().withNewSpec().withNewTemplate().withNewSpec().addToContainers(new ContainerBuilder().withName(config.getName())
+      .withImage(image).build()).endSpec().endTemplate().endSpec().build();
   }
 
   public static boolean isDefault(GlobalAutoScaling autoScaling) {

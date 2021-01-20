@@ -16,13 +16,15 @@
 
 package io.dekorate.openshift.decorator;
 
-import io.dekorate.deps.kubernetes.api.model.KubernetesListBuilder;
 import io.dekorate.doc.Description;
 import io.dekorate.openshift.config.OpenshiftConfig;
 import io.dekorate.kubernetes.config.Port;
 import io.dekorate.kubernetes.decorator.ResourceProvidingDecorator;
 import io.dekorate.utils.Labels;
 import io.dekorate.utils.Strings;
+import io.dekorate.deps.kubernetes.api.model.KubernetesListBuilder;
+import io.dekorate.deps.openshift.api.model.RouteBuilder;
+
 import static io.dekorate.utils.Ports.getHttpPort;
 
 import java.util.Optional;
@@ -48,7 +50,7 @@ public class AddRouteDecorator extends ResourceProvidingDecorator<KubernetesList
     }
 
     Port port = p.get();
-    list.addNewRouteItem()
+    list.addToItems(new RouteBuilder()
         .withNewMetadata()
         .withName(config.getName())
         .withLabels(Labels.createLabelsAsMap(config, "Route"))
@@ -64,6 +66,6 @@ public class AddRouteDecorator extends ResourceProvidingDecorator<KubernetesList
         .withNewTargetPort(port.getContainerPort())
       .endPort()
       .endSpec()
-      .endRouteItem();
+      .build());
   }
 }
