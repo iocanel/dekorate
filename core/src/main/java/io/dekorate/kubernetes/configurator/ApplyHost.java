@@ -15,11 +15,13 @@
  */
 package io.dekorate.kubernetes.configurator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.BaseConfigFluent;
 import io.dekorate.kubernetes.config.Configurator;
 
-@Description("sets the hostname based on system property: `dekorate.host`.")
+
+/**
+ * Sets the hostname based on system property: `dekorate.host`.
+ */
 public class ApplyHost extends Configurator<BaseConfigFluent> {
 
   public static final String DEKORATE_HOST = "dekorate.host";

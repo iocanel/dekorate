@@ -3,6 +3,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ServiceSpecFluent;
 
+/**
+ * Remove the label with the specified key from the specified Service.
+ */
 public class RemoveLabelFromServiceSelectorDecorator extends NamedResourceDecorator<ServiceSpecFluent<?>> {
 
   private String key;

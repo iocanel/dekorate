@@ -27,6 +27,9 @@ import io.fabric8.kubernetes.api.model.HostAliasBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecFluent;
 
+/**
+ * Add HostAlias to the specified resource's (e.g. Deploymnet, Pod etc) PodSpec.
+ */
 public class AddHostAliasesDecorator extends NamedResourceDecorator<PodSpecFluent<?>> {
 
   private final HostAlias hostAlias;

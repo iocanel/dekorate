@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Apply the specified tekoton image push service account to the configuration.
+ */
 public class ApplyTektonImagePushServiceAccountConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String serviceAccount;

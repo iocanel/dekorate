@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.PersistentVolumeClaim;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Configure the source workspace.
+ */
 public class ApplyTektonSourceWorkspaceConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String workspace;

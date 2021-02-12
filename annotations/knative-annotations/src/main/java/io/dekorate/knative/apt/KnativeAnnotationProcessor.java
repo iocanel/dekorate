@@ -23,11 +23,12 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.doc.Description;
 import io.dekorate.knative.annotation.KnativeApplication;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Generates knative manifests.")
+/**
+ * Generates knative manifests.
+ */
 @SupportedAnnotationTypes("io.dekorate.knative.annotation.KnativeApplication")
 public class KnativeAnnotationProcessor extends AbstractAnnotationProcessor {
 

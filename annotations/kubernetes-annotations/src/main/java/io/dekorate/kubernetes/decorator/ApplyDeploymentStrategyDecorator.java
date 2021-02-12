@@ -20,6 +20,9 @@ import io.dekorate.kubernetes.config.RollingUpdate;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.apps.DeploymentSpecFluent;
 
+/**
+ * Apply the specified DeploymentStrategy.
+ */
 public class ApplyDeploymentStrategyDecorator extends NamedResourceDecorator<DeploymentSpecFluent<?>> {
 
   private final DeploymentStrategy strategy;

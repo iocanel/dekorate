@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.AzureDiskVolume;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
-@Description("Add an Azure disk volume to the pod spec.")
+/**
+ * Add an Azure disk volume to the pod spec.
+ */
 public class AddAzureDiskVolumeDecorator extends Decorator<PodSpecBuilder> {
 
   private final AzureDiskVolume volume;

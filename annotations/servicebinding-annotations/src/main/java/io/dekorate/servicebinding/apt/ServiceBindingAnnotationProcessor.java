@@ -22,11 +22,12 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.doc.Description;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 import io.dekorate.servicebinding.annotation.ServiceBinding;
 
-@Description("Generate ServiceBinding custom resources.")
+/**
+ * Generate ServiceBinding custom resources.
+ */
 @SupportedAnnotationTypes("io.dekorate.servicebinding.annotation.ServiceBinding")
 public class ServiceBindingAnnotationProcessor extends AbstractAnnotationProcessor {
 

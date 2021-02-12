@@ -20,6 +20,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ConfigMapFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Apply the specified `container-concurrency` to global autoscaler configuration.
+ */
 public class ApplyGlobalContainerConcurrencyDecorator extends NamedResourceDecorator<ConfigMapFluent<?>> {
 
   private static final String CONTAINER_CONCURRENCY = "container-concurrency";

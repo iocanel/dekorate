@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.configurator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.kubernetes.config.ImageConfigurationFluent;
 
-@Description("Apply build related info to image configuration.")
+/**
+ * Add build related information to image configuration.
+ */
 public class ApplyBuildToImageConfiguration extends Configurator<ImageConfigurationFluent> {
 
   private static final String DEKORATE_BUILD = "dekorate.build";

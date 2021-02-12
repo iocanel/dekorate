@@ -15,12 +15,13 @@
  */
 package io.dekorate.tekton.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.decorator.Decorator;
 import io.dekorate.kubernetes.decorator.ResourceProvidingDecorator;
 import io.fabric8.tekton.pipeline.v1beta1.StepFluent;
 
-@Description("A decorator that applies the command to the application container.")
+/**
+ * A decorator that applies the command to the application container.
+ */
 public class ApplyCommandDecorator extends TektonStepDecorator<StepFluent> {
 
   private final String[] command;

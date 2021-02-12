@@ -23,6 +23,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.tekton.pipeline.v1beta1.Task;
 import io.fabric8.tekton.pipeline.v1beta1.TaskBuilder;
 
+/**
+ * Creates a new Task.
+ */
 public class TaskProvidingDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final Task task;

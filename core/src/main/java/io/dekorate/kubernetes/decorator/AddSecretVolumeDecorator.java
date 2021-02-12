@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.SecretVolume;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
-@Description("Add a secret volume to all pod specs.")
+/**
+ * Add a secret volume to all pod specs.
+ */
 public class AddSecretVolumeDecorator extends Decorator<PodSpecBuilder> {
 
   private final SecretVolume volume;

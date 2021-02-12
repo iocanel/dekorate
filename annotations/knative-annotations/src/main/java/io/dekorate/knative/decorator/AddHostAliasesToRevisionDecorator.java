@@ -30,6 +30,9 @@ import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.HostAliasBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Add the specified HostAlias to the specified Service's revision spec.
+ */
 public class AddHostAliasesToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final HostAlias hostAlias;

@@ -15,10 +15,11 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 
-@Description("A decorator that applies the command args to the application container.")
+/**
+ * A decorator that applies the command args to the application container.
+ */
 public class ApplyArgsDecorator extends ApplicationContainerDecorator<ContainerFluent> {
 
   private final String[] argument;

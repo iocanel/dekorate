@@ -26,6 +26,9 @@ import io.dekorate.kubernetes.config.Port;
 import io.dekorate.kubernetes.config.PortBuilder;
 import io.dekorate.utils.Ports;
 
+/**
+ * Set port 80 to all configured web ports.
+ */
 public class PopulateWebPort extends Configurator<BaseConfigFluent<?>> {
 
   public Port map(Port port) {

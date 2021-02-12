@@ -21,6 +21,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.tekton.pipeline.v1beta1.PipelineRunSpecFluent;
 
+/**
+ * Add the specified service account to the specified task.
+ */
 public class AddServiceAccountToTaskDecorator extends NamedResourceDecorator<PipelineRunSpecFluent> {
 
   private final String task;

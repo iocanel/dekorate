@@ -19,6 +19,9 @@ package io.dekorate.kubernetes.decorator;
 
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 
+/**
+ * Add an empty confimap to the list of genreated resources.
+ */
 public class AddConfigMapResourceProvidingDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final String name;

@@ -4,6 +4,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ServiceSpecFluent;
 
+/**
+ * Add the specified key/value pair as a label to the target service.
+ */
 public class AddLabelToServiceSelectorDecorator extends NamedResourceDecorator<ServiceSpecFluent<?>> {
 
   private String key;

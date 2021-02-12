@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.DeploymentConfigSpecFluent;
 
+/**
+ * Remove the label with the specifed key from the specified DeploymnetConfig.
+ */
 public class RemoveLabelFromDeploymentConfigSelectorDecorator extends NamedResourceDecorator<DeploymentConfigSpecFluent<?>> {
 
   private String key;

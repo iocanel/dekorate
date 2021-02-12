@@ -15,18 +15,15 @@
  * 
 **/
 
-package io.dekorate.kubernetes.doc;
+package io.dekorate.knative.doc;
 
-import io.sundr.builder.annotations.Pojo;
-import io.sundr.codegen.annotations.AnnotationSelector;
-import io.sundr.codegen.model.Attributeable;
+import io.sundr.codegen.annotations.PackageSelector;
 import io.sundr.transform.annotations.VelocityTransformation;
 import io.sundr.transform.annotations.VelocityTransformations;
 
-@VelocityTransformations(value = @VelocityTransformation(value = "/annotation-doc.vm", outputPath = "annotation-table.org", gather = true), annotations = {
-    @AnnotationSelector(value = Pojo.class)
+@VelocityTransformations(value = @VelocityTransformation(value = "/decorator-doc.vm", outputPath = "decorator-table.org", gather = true), packages = {
+    @PackageSelector(value = "io.dekorate.knative.decorator")
 })
-public class KubernetesAnnotationsTableGenerator {
+public class KnativeDecoratorTableGenerator {
 
-  private Object DEFAULT_VALUE = Attributeable.DEFAULT_VALUE;
 }

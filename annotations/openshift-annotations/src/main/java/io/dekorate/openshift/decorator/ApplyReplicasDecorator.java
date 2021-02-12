@@ -15,12 +15,13 @@
  */
 package io.dekorate.openshift.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.DeploymentConfigSpecFluent;
 
-@Description("Apply the number of replicas to the DeploymentConfigSpec.")
+/**
+ * Apply the number of replicas to the DeploymentConfigSpec.
+ */
 public class ApplyReplicasDecorator extends NamedResourceDecorator<DeploymentConfigSpecFluent> {
 
   private final int replicas;

@@ -15,7 +15,6 @@
  */
 package io.dekorate.knative.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.adapter.ContainerAdapter;
 import io.dekorate.kubernetes.config.Container;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
@@ -25,7 +24,9 @@ import io.fabric8.kubernetes.api.model.ObjectMeta;
 /**
  * A decorator that adds an init container to a pod template.
  */
-@Description("Add an init container to a revision.")
+/**
+ * Add an init container to a revision.
+ */
 public class AddInitContainerToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final Container container;

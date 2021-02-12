@@ -23,6 +23,9 @@ import io.dekorate.kubernetes.config.BaseConfigFluent;
 import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.utils.Strings;
 
+/**
+ *  Apply ImagePullSecret configuration based on the value of system property: `dekorate.image-pull-secrets`.
+ */
 public class ApplyImagePullSecretConfiguration extends Configurator<BaseConfigFluent> {
 
   private static final String EMPTY = "";

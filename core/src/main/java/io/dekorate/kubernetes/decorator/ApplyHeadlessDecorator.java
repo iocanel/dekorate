@@ -17,11 +17,12 @@
 
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ServiceSpecFluent;
 
-@Description("Make the service headless.")
+/**
+ * Make the service headless.
+ */
 public class ApplyHeadlessDecorator extends NamedResourceDecorator<ServiceSpecFluent> {
 
   public ApplyHeadlessDecorator(String resourceName) {

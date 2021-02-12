@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Mount;
 import io.fabric8.kubernetes.api.model.ContainerBuilder;
 
-@Description("Add mount to all containers.")
+/**
+ * Add mount to all containers.
+ */
 public class AddMountDecorator extends Decorator<ContainerBuilder> {
 
   private final Mount mount;

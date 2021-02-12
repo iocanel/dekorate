@@ -17,11 +17,12 @@ package io.dekorate.kubernetes.decorator;
 
 import io.dekorate.Logger;
 import io.dekorate.LoggerFactory;
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Probe;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 
-@Description("Add a liveness probe to all containers.")
+/**
+ * Add a liveness probe to all containers.
+ */
 public class AddLivenessProbeDecorator extends AbstractAddProbeDecorator {
 
   private final Logger LOGGER = LoggerFactory.getLogger();

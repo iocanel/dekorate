@@ -23,6 +23,9 @@ import io.dekorate.utils.Maps;
 import io.fabric8.kubernetes.api.model.ConfigMapFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Add the specified map or key/value pairs as data to the target config map.
+ */
 public class AddConfigMapDataDecorator extends NamedResourceDecorator<ConfigMapFluent<?>> {
 
   private final Map<String, String> map;

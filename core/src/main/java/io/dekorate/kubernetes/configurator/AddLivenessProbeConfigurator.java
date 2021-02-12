@@ -22,6 +22,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.kubernetes.config.Probe;
 import io.dekorate.utils.Beans;
 
+/**
+ * Add the specified liveness probe to the configuration, optionally overwriting existing one.
+ */
 public class AddLivenessProbeConfigurator extends Configurator<BaseConfigFluent> {
 
   private final Probe probe;

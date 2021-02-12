@@ -20,6 +20,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ConfigMapFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Apply the specified value as target utilization in the global autoscaler configuration.
+ */
 public class ApplyGlobalTargetUtilizationDecorator extends NamedResourceDecorator<ConfigMapFluent<?>> {
 
   private static final String CONTAINER_CONCURRENCY_TARGET_DEFAULT = "container-concurrency-target-default";

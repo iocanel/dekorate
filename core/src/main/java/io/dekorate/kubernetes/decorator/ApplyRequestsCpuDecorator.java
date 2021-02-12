@@ -19,6 +19,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 import io.fabric8.kubernetes.api.model.Quantity;
 
+/**
+ * Apply requests cpu ammount to the specified container.
+ */ 
 public class ApplyRequestsCpuDecorator extends ApplicationContainerDecorator<ContainerFluent<?>> {
 
   private static final String CPU = "cpu";

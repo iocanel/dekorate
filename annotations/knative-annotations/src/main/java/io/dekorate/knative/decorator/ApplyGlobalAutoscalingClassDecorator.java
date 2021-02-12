@@ -21,6 +21,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ConfigMapFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Apply the specified  `pod-autosclaer-class` to global autoscaler configuration.
+ */
 public class ApplyGlobalAutoscalingClassDecorator extends NamedResourceDecorator<ConfigMapFluent<?>> {
 
   private static final String POD_AUTOSCALER_CLASS = "pod-autoscaler-class";

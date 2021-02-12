@@ -21,14 +21,15 @@ import static io.dekorate.utils.Ports.getHttpPort;
 import java.util.Map;
 import java.util.Optional;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.KubernetesConfig;
 import io.dekorate.kubernetes.config.Port;
 import io.dekorate.utils.Strings;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.networking.v1.IngressBuilder;
 
-@Description("Add an ingress to the list.")
+/**
+ * Add an ingress to the list.
+ */
 public class AddIngressDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final KubernetesConfig config;

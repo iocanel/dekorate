@@ -29,10 +29,11 @@ import io.dekorate.LoggerFactory;
 import io.dekorate.adapter.DekorateConfigAdapter;
 import io.dekorate.annotation.Dekorate;
 import io.dekorate.config.DekorateConfig;
-import io.dekorate.doc.Description;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Detects @Dekorate and configures application based on the specified configuration files.")
+/**
+ * Detects @Dekorate and configures application based on the specified configuration files.
+ */
 @SupportedAnnotationTypes({ "io.dekorate.annotation.Dekorate" })
 public class DekorateProcessor extends AbstractAnnotationProcessor {
 

@@ -17,14 +17,15 @@
 
 package io.dekorate.prometheus.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.decorator.ResourceProvidingDecorator;
 import io.dekorate.prometheus.config.ServiceMonitorConfig;
 import io.dekorate.prometheus.model.ServiceMonitorBuilder;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add a ServiceMonitor resource to the list of generated resources.")
+/**
+ * Add a ServiceMonitor resource to the list of generated resources.
+ */
 public class AddServiceMonitorResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final ServiceMonitorConfig config;

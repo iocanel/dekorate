@@ -15,16 +15,14 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.adapter.ContainerAdapter;
 import io.dekorate.kubernetes.config.Container;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
 /**
- * A decorator that adds an init container to a pod template.
+ * Add an init container to a pod template.
  */
-@Description("Add an init container to a pod template.")
 public class AddInitContainerDecorator extends NamedResourceDecorator<PodSpecBuilder> {
 
   private final Container container;

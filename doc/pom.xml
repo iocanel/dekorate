@@ -21,6 +21,18 @@
 
     <dependency>
       <groupId>io.dekorate</groupId>
+      <artifactId>crd-annotations</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>option-annotations</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
       <artifactId>kubernetes-annotations</artifactId>
       <version>${project.version}</version>
     </dependency>
@@ -40,6 +52,12 @@
     <dependency>
       <groupId>io.dekorate</groupId>
       <artifactId>tekton-annotations</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.dekorate</groupId>
+      <artifactId>servicebinding-annotations</artifactId>
       <version>${project.version}</version>
     </dependency>
 

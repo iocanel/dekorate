@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Apply the specified registry infor (url, username, password) to the specified configuraiton.
+ */
 public class ApplyTektonRegistryInfoConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String registry;

@@ -25,6 +25,9 @@ import io.fabric8.kubernetes.api.builder.VisitableBuilder;
 import io.fabric8.kubernetes.api.builder.Visitor;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Remove the specified key from the specified resource`s selector.
+ */
 public class RemoveFromSelectorDecorator extends NamedResourceDecorator<VisitableBuilder> {
 
   private final String key;

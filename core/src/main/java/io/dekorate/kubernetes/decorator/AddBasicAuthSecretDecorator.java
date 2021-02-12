@@ -26,6 +26,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.SecretBuilder;
 
+/**
+ * Add a new Secret with the specified authentication information.
+ */
 public class AddBasicAuthSecretDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private static final String KUBERNETES_IO_BASIC_AUTH = "kubernetes.io/basic-auth";

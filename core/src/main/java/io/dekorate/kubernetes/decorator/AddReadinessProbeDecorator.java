@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Probe;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 
-@Description("Add a readiness probe to all containers.")
+/**
+ * Add a readiness probe to all containers.
+ */
 public class AddReadinessProbeDecorator extends AbstractAddProbeDecorator {
 
   public AddReadinessProbeDecorator(String containerName, Probe probe) {

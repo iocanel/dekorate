@@ -15,7 +15,6 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.adapter.ContainerAdapter;
 import io.dekorate.kubernetes.config.Container;
 import io.dekorate.utils.Predicates;
@@ -25,9 +24,8 @@ import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
 /**
- * A decorator that adds a the container if no matching container found.
+ * A decorator that adds a the container if no matching container found
  */
-@Description("A decorator that adds a the container if no matching container found")
 public class ApplyApplicationContainerDecorator extends NamedResourceDecorator<PodSpecBuilder> {
 
   private final Container container;

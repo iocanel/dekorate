@@ -23,11 +23,12 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import io.dekorate.WithSession;
-import io.dekorate.doc.Description;
 import io.dekorate.option.annotation.GeneratorOptions;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Processing generator options, which are used for customizing the generation process")
+/**
+ * Processing generator options, which are used for customizing the generation process
+ */
 @SupportedAnnotationTypes({
     "io.dekorate.annotation.Dekorate",
     "io.dekorate.kubernetes.annotation.KubernetesApplication",

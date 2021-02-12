@@ -17,7 +17,6 @@
 
 package io.dekorate.s2i.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.decorator.ResourceProvidingDecorator;
 import io.dekorate.s2i.config.S2iBuildConfig;
 import io.dekorate.utils.Images;
@@ -25,7 +24,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.ImageStreamBuilder;
 
-@Description("Add a builder ImageStream resource to the list of generated resources.")
+/**
+ * Add a builder ImageStream resource to the list of generated resources.
+ */
 public class AddBuilderImageStreamResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private S2iBuildConfig config;

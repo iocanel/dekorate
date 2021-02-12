@@ -15,13 +15,14 @@
  */
 package io.dekorate.knative.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.SecretVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add a secret volume to all pod specs.")
+/**
+ * Add a secret volume to all pod specs.
+ */
 public class AddSecretVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final SecretVolume volume;

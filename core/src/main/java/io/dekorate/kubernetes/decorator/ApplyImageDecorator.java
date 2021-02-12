@@ -17,6 +17,9 @@ package io.dekorate.kubernetes.decorator;
 
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 
+/**
+ * Apply the specified image to the specified container.
+ */
 public class ApplyImageDecorator extends ApplicationContainerDecorator<ContainerFluent> {
 
   private final String image;

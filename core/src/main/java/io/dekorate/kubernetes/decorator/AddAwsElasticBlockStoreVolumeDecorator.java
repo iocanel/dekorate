@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.AwsElasticBlockStoreVolume;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
-@Description("Add an elastic block store volume to the pod spec.")
+/**
+ * Add an elastic block store volume to the pod spec.
+ */
 public class AddAwsElasticBlockStoreVolumeDecorator extends Decorator<PodSpecBuilder> {
 
   private final AwsElasticBlockStoreVolume volume;

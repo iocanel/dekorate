@@ -20,6 +20,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.ServiceSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Apply the specified traffic percentage, to the specified revision (using resvisionName, tag or latestRevision).
+ */ 
 public class ApplyTrafficDecorator extends NamedResourceDecorator<ServiceSpecFluent<?>> {
 
   private final String revisionName;

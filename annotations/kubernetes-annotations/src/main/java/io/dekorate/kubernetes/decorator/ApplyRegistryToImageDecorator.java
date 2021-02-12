@@ -19,6 +19,9 @@ import io.dekorate.utils.Images;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 import io.fabric8.kubernetes.api.model.apps.DeploymentBuilder;
 
+/**
+ * Apply the specified registry, group, name and version to the container image.
+ */
 public class ApplyRegistryToImageDecorator extends Decorator<DeploymentBuilder> {
 
   private final String registry;

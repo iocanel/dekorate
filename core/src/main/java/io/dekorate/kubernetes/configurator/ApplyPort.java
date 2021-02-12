@@ -28,6 +28,9 @@ import io.dekorate.utils.Ports;
 import io.dekorate.utils.Strings;
 import java.util.function.Predicate;
 
+/**
+ * Apply the specified port to the configuration.
+ */ 
 public class ApplyPort extends Configurator<BaseConfigFluent<?>> {
 
   private static final String FALLBACK_PORT_NAME = "http";

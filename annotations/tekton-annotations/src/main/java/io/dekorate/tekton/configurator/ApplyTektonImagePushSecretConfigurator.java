@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Apply the speicifed image push secret in the configuration.
+ */
 public class ApplyTektonImagePushSecretConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String secret;

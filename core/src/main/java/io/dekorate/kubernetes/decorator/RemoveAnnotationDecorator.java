@@ -15,14 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ObjectMetaBuilder;
 
 /**
- * A decorator that removes an annotation from the matching resources (filtered by name and/or kinds).
+ * Remove an annotation from the matching resources (filtered by name and/or kinds).
  */
-@Description("Remove an annotation from the matching resources (filtered by name and/or kinds).")
 public class RemoveAnnotationDecorator extends NamedResourceDecorator<ObjectMetaBuilder> {
 
   private final String annotationKey;

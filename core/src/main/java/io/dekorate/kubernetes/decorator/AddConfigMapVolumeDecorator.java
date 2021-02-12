@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.ConfigMapVolume;
 import io.fabric8.kubernetes.api.model.PodSpecBuilder;
 
-@Description("Add a configmap volume to the pod spec.")
+/**
+ * Add a configmap volume to the pod spec.
+ */
 public class AddConfigMapVolumeDecorator extends Decorator<PodSpecBuilder> {
 
   private final ConfigMapVolume volume;

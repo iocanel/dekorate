@@ -23,11 +23,12 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.doc.Description;
 import io.dekorate.openshift.annotation.OpenshiftApplication;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Generates openshift manifests.")
+/**
+ * Generates openshift manifests.
+ */
 @SupportedAnnotationTypes("io.dekorate.openshift.annotation.OpenshiftApplication")
 public class OpenshiftAnnotationProcessor extends AbstractAnnotationProcessor {
 

@@ -23,6 +23,9 @@ import java.util.Set;
 
 import io.fabric8.kubernetes.api.model.ContainerPortFluent;
 
+/**
+ * Set the specified name to all ports that their name is found in the specified set. 
+ */
 public class ApplyPortNameDecorator extends ApplicationContainerDecorator<ContainerPortFluent<?>> {
 
   private final String name;

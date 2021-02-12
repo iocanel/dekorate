@@ -18,6 +18,9 @@ package io.dekorate.kubernetes.decorator;
 import io.dekorate.kubernetes.annotation.ImagePullPolicy;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 
+/**
+ * Apply the specified ImagePullPolicy to the specified container.
+ */
 public class ApplyImagePullPolicyDecorator extends ApplicationContainerDecorator<ContainerFluent<?>> {
 
   private final ImagePullPolicy imagePullPolicy;

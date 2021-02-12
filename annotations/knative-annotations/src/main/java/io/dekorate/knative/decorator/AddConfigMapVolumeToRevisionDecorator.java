@@ -15,13 +15,14 @@
  */
 package io.dekorate.knative.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.ConfigMapVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add a configmap volume to the pod spec.")
+/**
+ * Add a configmap volume to the pod spec.
+ */
 public class AddConfigMapVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final ConfigMapVolume volume;

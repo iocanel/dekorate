@@ -17,16 +17,14 @@ package io.dekorate.kubernetes.decorator;
 
 import java.util.Objects;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.annotation.Protocol;
 import io.dekorate.kubernetes.config.Port;
 import io.dekorate.utils.Predicates;
 import io.fabric8.kubernetes.api.model.ContainerBuilder;
 
 /**
- * A decorator that adds a port to all containers.
+ * Add port to to the specified container(s).
  */
-@Description("Add port to to the specified container(s).")
 public class AddPortDecorator extends ApplicationContainerDecorator<ContainerBuilder> {
 
   private final Port port;

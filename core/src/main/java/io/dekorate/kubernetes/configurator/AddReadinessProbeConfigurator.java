@@ -22,6 +22,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.kubernetes.config.Probe;
 import io.dekorate.utils.Beans;
 
+/**
+ * Add the specified readiness probe to the configuration, optionally overwriting existing one.
+ */
 public class AddReadinessProbeConfigurator extends Configurator<BaseConfigFluent> {
 
   private final Probe probe;

@@ -24,11 +24,12 @@ import javax.lang.model.element.TypeElement;
 
 import io.dekorate.Logger;
 import io.dekorate.LoggerFactory;
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.annotation.KubernetesApplication;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Generates kubernetes manifests.")
+/**
+ * Generates kubernetes manifests.
+ */
 @SupportedAnnotationTypes("io.dekorate.kubernetes.annotation.KubernetesApplication")
 public class KubernetesAnnotationProcessor extends AbstractAnnotationProcessor {
 

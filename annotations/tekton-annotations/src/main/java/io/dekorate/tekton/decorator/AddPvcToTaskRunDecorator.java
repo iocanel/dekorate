@@ -21,6 +21,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.tekton.pipeline.v1beta1.TaskRunSpecFluent;
 
+/**
+ * Add a new workspace pointing to a claim in the specified TaskRun.
+ */
 public class AddPvcToTaskRunDecorator extends NamedResourceDecorator<TaskRunSpecFluent<?>> {
 
   private final String workspace;

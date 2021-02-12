@@ -17,6 +17,6 @@
 #set ($description = $annotation.getParameters().get("value"))
 #end
 #end
-| ${m.name} | $target | $description |
+| ${m.name} | $target | $description | 
 #end
 #end

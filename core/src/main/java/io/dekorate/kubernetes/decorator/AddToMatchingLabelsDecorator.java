@@ -4,6 +4,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.LabelSelectorFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Add the specified key/valuy pair to the specified resource's selector match labels.
+ */
 public class AddToMatchingLabelsDecorator extends NamedResourceDecorator<LabelSelectorFluent<?>> {
 
   private String key;

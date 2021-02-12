@@ -15,13 +15,15 @@
  */
 package io.dekorate.kubernetes.configurator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.BaseConfigFluent;
 import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.kubernetes.config.PortBuilder;
 import java.util.function.Predicate;
 
-@Description("Sets the path for the matching port.")
+
+/**
+ * Sets the path for the matching port.
+ */
 public class SetPortPath extends Configurator<BaseConfigFluent<?>> {
 
   private final Predicate<PortBuilder> predicate;

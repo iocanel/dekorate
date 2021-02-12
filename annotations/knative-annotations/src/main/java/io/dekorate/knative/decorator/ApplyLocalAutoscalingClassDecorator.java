@@ -22,6 +22,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.ServiceFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Annotated the specified Service with the specified `autoscaling.knative.dev/class` value.
+ */
 public class ApplyLocalAutoscalingClassDecorator extends NamedResourceDecorator<ServiceFluent<?>> {
 
   private static final String AUTOSCALING_CLASS = "autoscaling.knative.dev/class";

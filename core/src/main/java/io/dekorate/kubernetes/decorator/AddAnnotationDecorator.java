@@ -18,7 +18,6 @@ package io.dekorate.kubernetes.decorator;
 import java.util.Arrays;
 import java.util.Objects;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Annotation;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ObjectMetaBuilder;
@@ -26,7 +25,6 @@ import io.fabric8.kubernetes.api.model.ObjectMetaBuilder;
 /**
  * A decorator that adds an annotation to the matching resources (filtered by name and/or kinds).
  */
-@Description("Add an annotation to the matching resources (filtered by name and/or kinds).")
 public class AddAnnotationDecorator extends NamedResourceDecorator<ObjectMetaBuilder> {
 
   private final Annotation annotation;

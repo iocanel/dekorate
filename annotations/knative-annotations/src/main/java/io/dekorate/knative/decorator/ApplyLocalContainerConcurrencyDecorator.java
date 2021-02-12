@@ -21,6 +21,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Applly the specifed container concurrenty in the specifed Service's revision spec.
+ */
 public class ApplyLocalContainerConcurrencyDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final long target;

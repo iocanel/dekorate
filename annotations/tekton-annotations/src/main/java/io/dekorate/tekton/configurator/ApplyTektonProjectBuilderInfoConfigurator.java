@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Apply the specified project builder info (image, command & args) in the configuration.
+ */
 public class ApplyTektonProjectBuilderInfoConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String image;

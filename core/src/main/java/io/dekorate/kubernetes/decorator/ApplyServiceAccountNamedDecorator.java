@@ -15,12 +15,13 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.utils.Strings;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecFluent;
 
-@Description("Apply the service account.")
+/**
+ * Apply the service account.
+ */
 public class ApplyServiceAccountNamedDecorator extends NamedResourceDecorator<PodSpecFluent> {
 
   private static final String NONE = null;

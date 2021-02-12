@@ -15,13 +15,14 @@
  */
 package io.dekorate.knative.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.PersistentVolumeClaimVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add a persistent volume claim volume to all pod specs.")
+/**
+ * Add a persistent volume claim volume to all pod specs.
+ */
 public class AddPvcVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final PersistentVolumeClaimVolume volume;

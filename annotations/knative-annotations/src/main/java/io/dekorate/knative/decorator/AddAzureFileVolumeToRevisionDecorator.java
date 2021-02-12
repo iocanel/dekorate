@@ -15,13 +15,14 @@
  */
 package io.dekorate.knative.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.AzureFileVolume;
 import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.RevisionSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add an Azure File volume to the Pod spec.")
+/**
+ * Add an Azure File volume to the Pod spec.
+ */
 public class AddAzureFileVolumeToRevisionDecorator extends NamedResourceDecorator<RevisionSpecFluent<?>> {
 
   private final AzureFileVolume volume;

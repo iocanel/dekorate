@@ -17,7 +17,6 @@ package io.dekorate.kubernetes.decorator;
 
 import java.util.Objects;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Env;
 import io.dekorate.utils.Strings;
 import java.util.function.Predicate;
@@ -26,9 +25,8 @@ import io.fabric8.kubernetes.api.model.EnvFromSourceBuilder;
 import io.fabric8.kubernetes.api.model.EnvVarBuilder;
 
 /**
- * A decorator that adds an environment variable to the specified container(s).
+ * Add a environment variable to the container.
  */
-@Description("Add a environment variable to the container.")
 public class AddEnvVarDecorator extends ApplicationContainerDecorator<ContainerBuilder> {
 
   private final Env env;

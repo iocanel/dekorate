@@ -5,6 +5,9 @@ import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.tekton.config.TektonConfigFluent;
 import io.dekorate.utils.Strings;
 
+/**
+ * Apply the deployer image to the configuration.
+ */
 public class ApplyTektonDeployerImageConfigurator extends Configurator<TektonConfigFluent<?>> {
 
   private final String deployerImage;

@@ -6,6 +6,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.DeploymentConfigSpecFluent;
 
+/**
+ * Add the specifed key/value pair as a label to the specifed DeploymnetConfig.
+ */
 public class AddLabelToDeploymentConfigSelectorDecorator extends NamedResourceDecorator<DeploymentConfigSpecFluent<?>> {
 
   private String key;

@@ -3,6 +3,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.LabelSelectorFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Remove the specified key from the specified resource's selector matchLabels.
+ */
 public class RemoveFromMatchingLabelsDecorator extends NamedResourceDecorator<LabelSelectorFluent<?>> {
 
   private String key;

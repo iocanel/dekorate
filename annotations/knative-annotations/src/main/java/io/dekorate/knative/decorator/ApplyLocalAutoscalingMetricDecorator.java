@@ -22,6 +22,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.ServiceFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Annotate the specified Service with the specified `autoscaling.knative.dev/metric` value.
+ */
 public class ApplyLocalAutoscalingMetricDecorator extends NamedResourceDecorator<ServiceFluent<?>> {
 
   private static final String AUTOSCALING_METRIC = "autoscaling.knative.dev/metric";

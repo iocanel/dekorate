@@ -17,12 +17,13 @@ package io.dekorate.kubernetes.configurator;
 
 import java.util.Objects;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.BaseConfigFluent;
 import io.dekorate.kubernetes.config.Configurator;
 import io.dekorate.kubernetes.config.Port;
 
-@Description("adds a port to all containers.")
+/**
+ * Add the specified Port to all containers in the configuration.
+ */
 public class AddPort extends Configurator<BaseConfigFluent> {
 
   private final Port port;

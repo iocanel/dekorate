@@ -20,6 +20,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.knative.serving.v1.ServiceSpecFluent;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * Set the specified revision name on the template of the specified Service.
+ */
 public class ApplyRevisionNameDecorator extends NamedResourceDecorator<ServiceSpecFluent<?>> {
 
   private final String revisionName;

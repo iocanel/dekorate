@@ -28,6 +28,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.Secret;
 import io.fabric8.kubernetes.api.model.SecretBuilder;
 
+/**
+ * Add a kubernetes.io/dockerconfigjson Secret to the list of generated resources.
+ */
 public class AddDockerConfigJsonSecretDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private static final String TYPE = "kubernetes.io/dockerconfigjson";

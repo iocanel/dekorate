@@ -21,6 +21,9 @@ import io.dekorate.utils.Predicates;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecFluent;
 
+/**
+ * Remove all probes from init containers.
+ */
 public class RemoveProbesFromInitContainerDecorator extends NamedResourceDecorator<PodSpecFluent<?>> {
 
 	@Override

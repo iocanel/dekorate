@@ -21,6 +21,9 @@ import io.dekorate.kubernetes.decorator.NamedResourceDecorator;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.tekton.pipeline.v1beta1.PipelineRunSpecFluent;
 
+/**
+ * Add a new workspace pointing to a claim in the specified PipelineRun.
+ */
 public class AddPvcToPipelineRunDecorator extends NamedResourceDecorator<PipelineRunSpecFluent<?>> {
 
   private final String workspace;

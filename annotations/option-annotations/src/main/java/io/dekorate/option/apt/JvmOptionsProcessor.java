@@ -23,11 +23,12 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
 import io.dekorate.WithSession;
-import io.dekorate.doc.Description;
 import io.dekorate.option.annotation.JvmOptions;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 
-@Description("Jvm options, which are used for the target deployment.")
+/**
+ * Jvm options, which are used for the target deployment.
+ */
 @SupportedAnnotationTypes("io.dekorate.option.annotation.JvmOptions")
 public class JvmOptionsProcessor extends AbstractAnnotationProcessor implements  WithSession {
 

@@ -16,16 +16,14 @@
 package io.dekorate.kubernetes.decorator;
 
 import io.dekorate.WithProject;
-import io.dekorate.doc.Description;
 import io.dekorate.project.Project;
 import io.dekorate.utils.Annotations;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.ObjectMetaBuilder;
 
 /**
- * A decorator that adds a label to resources.
+ * Add a vcs uri label to the all metadata.
  */
-@Description("Add a vcs uri label to the all metadata.")
 public class AddCommitIdAnnotationDecorator extends NamedResourceDecorator<ObjectMetaBuilder> implements WithProject {
 
   private final String annotationKey;

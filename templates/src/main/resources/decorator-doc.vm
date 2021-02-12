@@ -1,22 +1,32 @@
 | Decorator | Target | Descriptron |
 |-
 #foreach ($m in ${model.values()})
+#set ($pkg = $m.getPackageName())
 #set ($superclass = $m.getExtendsList().get(0))
-#if ($superclass.getName().equals("Decorator"))
+#if ($superclass.getName().endsWith("Decorator"))
 #elseif ($superclass.getDefinition().getExtendsList().size() == 1)
 #set ($superclass = $superclass.getDefinition().getExtendsList().get(0))
 #end
 #if ($m.isAbstract())
-#elseif ($superclass.getName().equals("Decorator"))
+#elseif ($superclass.getName().endsWith("Decorator") && $superclass.getArguments().size() == 1)
 #set ($target = $superclass.getArguments().get(0))
 #set ($target = $target.toString().replaceAll("Builder","").replaceAll("Fluent$",""))
-#set ($description = $m.annotations)
-#set  ($annotations = $m.annotations)
-#foreach  ($annotation in $annotations)
-#if ($annotation.getClassRef().getName().equals("Description"))
-#set ($description = $annotation.getParameters().get("value"))
+## Description
+##
+#set ($description = "")
+#set  ($comments = $m.comments)
+#foreach  ($comment in $comments)
+#if ($comment.startsWith("@"))
+#set ($description = $description)
+#elseif ($description.isEmpty())
+#set ($description = $comment)
+#else
+#set ($description = $description + " " + $comment)
 #end
 #end
+## Inherited decorators will have no comments/description (not retained in the jar) so we can use description to filter them!
+## #if (!$description.isEmpty())
 | ${m.name} | $target | $description |
+## #end
 #end
 #end

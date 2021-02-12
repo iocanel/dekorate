@@ -23,11 +23,12 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 
-import io.dekorate.doc.Description;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 import io.dekorate.tekton.annotation.TektonApplication;
 
-@Description("Generates tekton manifests.")
+/**
+ * Generates tekton manifests.
+ */
 @SupportedAnnotationTypes("io.dekorate.tekton.annotation.TektonApplication")
 public class TektonAnnotationProcessor extends AbstractAnnotationProcessor {
 

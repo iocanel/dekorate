@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.dekorate.doc;
+package io.dekorate.templates;
 
 import io.sundr.codegen.annotations.PackageSelector;
 import io.sundr.transform.annotations.VelocityTransformation;

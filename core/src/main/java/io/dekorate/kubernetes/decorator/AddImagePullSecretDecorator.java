@@ -21,6 +21,9 @@ import io.dekorate.utils.Strings;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.PodSpecFluent;
 
+/**
+ * Add the specified ImagePullSecret to the specified resources PodSpec.
+ */
 public class AddImagePullSecretDecorator extends NamedResourceDecorator<PodSpecFluent<?>> {
 
   private final String imagePullSecret;

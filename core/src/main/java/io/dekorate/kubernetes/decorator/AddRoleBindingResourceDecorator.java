@@ -15,16 +15,14 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.utils.Strings;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.kubernetes.api.model.rbac.RoleBindingBuilder;
 
 /**
- * AddRoleBindingDecorator
+ * Add a Rolebinding resource to the list of generated resources.
  */
-@Description("Add a Rolebinding resource to the list of generated resources.")
 public class AddRoleBindingResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private static final String DEFAULT_RBAC_API_GROUP = "rbac.authorization.k8s.io";

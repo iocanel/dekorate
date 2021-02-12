@@ -18,6 +18,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.LabelSelector;
 import io.fabric8.kubernetes.api.model.apps.DeploymentSpecFluent;
 
+/**
+ * Apply the specified labelSelector to the specified Deployment's spec.
+ */
 public class ApplyLabelSelectorDecorator extends Decorator<DeploymentSpecFluent> {
 
   private final LabelSelector labelSelector;

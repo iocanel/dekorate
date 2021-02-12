@@ -15,11 +15,12 @@
  */
 package io.dekorate.kubernetes.configurator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.BaseConfigFluent;
 import io.dekorate.kubernetes.config.Configurator;
 
-@Description("Apply deployment related info to application configuration.")
+/**
+ * Apply deployment related info to application configuration.
+ */
 public class ApplyDeployToApplicationConfiguration extends Configurator<BaseConfigFluent> {
 
   public static final String DEKORATE_DEPLOY = "dekorate.deploy";

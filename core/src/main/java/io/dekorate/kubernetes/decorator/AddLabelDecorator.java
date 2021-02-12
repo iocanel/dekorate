@@ -17,16 +17,14 @@ package io.dekorate.kubernetes.decorator;
 
 import java.util.Arrays;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.Label;
 import io.dekorate.utils.Metadata;
 import io.fabric8.kubernetes.api.builder.VisitableBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
 /**
- * A decorator that adds a label to the matching resources (filtered by name and/or kinds).
+ * Add a label to the matching resources (filtered by name and/or kinds).
  */
-@Description("Add a label to the matching resources (filtered by name and/or kinds).")
 public class AddLabelDecorator extends NamedResourceDecorator<VisitableBuilder> {
 
   private final Label label;

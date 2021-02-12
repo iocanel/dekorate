@@ -20,8 +20,14 @@ import io.sundr.transform.annotations.VelocityTransformation;
 import io.sundr.transform.annotations.VelocityTransformations;
 
 @VelocityTransformations(value = @VelocityTransformation(value = "/configurator-doc.vm", outputPath = "configurators-table.org", gather = true), packages = {
+    @PackageSelector(value = "io.dekorate.option.configurator"),
+    @PackageSelector(value = "io.dekorate.crd.configurator"),
     @PackageSelector(value = "io.dekorate.kubernetes.configurator"),
-    @PackageSelector(value = "io.dekorate.openshift.configurator")
+    @PackageSelector(value = "io.dekorate.openshift.configurator"),
+    @PackageSelector(value = "io.dekorate.tekton.configurator"),
+    @PackageSelector(value = "io.dekorate.servicebinding.configurator"),
+    @PackageSelector(value = "io.dekorate.spring.configurator"),
+    @PackageSelector(value = "io.dekorate.thorntail.configurator")
 })
 public class DocumentConfigurators {
 

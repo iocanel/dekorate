@@ -25,6 +25,9 @@ import io.fabric8.kubernetes.api.model.networking.v1.HTTPIngressPathBuilder;
 import io.fabric8.kubernetes.api.model.networking.v1.IngressRuleBuilder;
 import io.fabric8.kubernetes.api.model.networking.v1.IngressSpecBuilder;
 
+/**
+ * Add an IngressRule to an existing Ingress.
+ */
 public class AddIngressRuleDecorator extends NamedResourceDecorator<IngressSpecBuilder> {
 
   private final String host;

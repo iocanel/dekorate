@@ -25,6 +25,9 @@ import io.fabric8.kubernetes.api.builder.VisitableBuilder;
 import io.fabric8.kubernetes.api.builder.Visitor;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
+/**
+ * The the specified key/value pair to the selected resource's selector.
+ */
 public class AddToSelectorDecorator extends NamedResourceDecorator<VisitableBuilder> {
 
   private final String key;

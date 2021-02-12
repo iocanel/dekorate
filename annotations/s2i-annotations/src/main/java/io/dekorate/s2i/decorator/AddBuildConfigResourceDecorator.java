@@ -17,7 +17,6 @@
 
 package io.dekorate.s2i.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.decorator.AddLabelDecorator;
 import io.dekorate.kubernetes.decorator.Decorator;
 import io.dekorate.kubernetes.decorator.RemoveLabelDecorator;
@@ -30,7 +29,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.BuildConfigBuilder;
 
-@Description("Add a BuildConfig resource to the list of generated resources.")
+/**
+ * Add a BuildConfig resource to the list of generated resources.
+ */
 public class AddBuildConfigResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private static final String IMAGESTREAMTAG = "ImageStreamTag";

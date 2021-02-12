@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 import io.dekorate.Logger;
 import io.dekorate.LoggerFactory;
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.BaseConfig;
 import io.dekorate.kubernetes.config.Port;
 import io.dekorate.utils.Labels;
@@ -35,7 +34,9 @@ import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ServicePort;
 import io.fabric8.kubernetes.api.model.ServicePortBuilder;
 
-@Description("Add a service to the list.")
+/**
+ * Add a service to the list.
+ */
 public class AddServiceResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger();

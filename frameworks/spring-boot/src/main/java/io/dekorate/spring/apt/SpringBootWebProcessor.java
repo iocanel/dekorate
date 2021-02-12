@@ -31,11 +31,12 @@ import io.dekorate.ConfigurationRegistry;
 import io.dekorate.Logger;
 import io.dekorate.LoggerFactory;
 import io.dekorate.Session;
-import io.dekorate.doc.Description;
 import io.dekorate.processor.AbstractAnnotationProcessor;
 import io.dekorate.spring.generator.SpringBootWebAnnotationGenerator;
 
-@Description("Detects Spring Boot web endpoints and registers the http port.")
+/**
+ * Detects Spring Boot web endpoints and registers the http port.
+ */
 @SupportedAnnotationTypes({ "org.springframework.web.bind.annotation.RestController",
     "org.springframework.web.bind.annotation.RequestMapping", "org.springframework.web.bind.annotation.GetMapping",
     "org.springframework.data.rest.core.annotation.RepositoryRestResource", "javax.ws.rs.GET", "javax.ws.rs.POST",

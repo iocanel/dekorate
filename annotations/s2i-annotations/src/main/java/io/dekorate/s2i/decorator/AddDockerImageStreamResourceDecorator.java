@@ -17,14 +17,15 @@
 
 package io.dekorate.s2i.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.kubernetes.config.ImageConfiguration;
 import io.dekorate.kubernetes.decorator.ResourceProvidingDecorator;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 import io.fabric8.openshift.api.model.ImageStreamBuilder;
 
-@Description("Add a output ImageStream resource to the list of generated resources.")
+/**
+ * Add a output ImageStream resource to the list of generated resources.
+ */
 public class AddDockerImageStreamResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final ImageConfiguration config;

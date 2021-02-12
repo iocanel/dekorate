@@ -19,6 +19,9 @@ package io.dekorate.kubernetes.decorator;
 import io.fabric8.kubernetes.api.model.ContainerFluent;
 import io.fabric8.kubernetes.api.model.Quantity;
 
+/**
+ * Apply the specified requests memory ammount to the specified container.
+ */
 public class ApplyRequestsMemoryDecorator extends ApplicationContainerDecorator<ContainerFluent<?>> {
 
   private static final String MEM = "memory";

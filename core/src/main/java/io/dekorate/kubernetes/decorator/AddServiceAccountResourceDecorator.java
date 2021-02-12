@@ -15,12 +15,13 @@
  */
 package io.dekorate.kubernetes.decorator;
 
-import io.dekorate.doc.Description;
 import io.dekorate.utils.Strings;
 import io.fabric8.kubernetes.api.model.KubernetesListBuilder;
 import io.fabric8.kubernetes.api.model.ObjectMeta;
 
-@Description("Add a ServiceAccount resource to the list of generated resources.")
+/**
+ * Add a ServiceAccount resource to the list of generated resources.
+ */
 public class AddServiceAccountResourceDecorator extends ResourceProvidingDecorator<KubernetesListBuilder> {
 
   private final String name;
