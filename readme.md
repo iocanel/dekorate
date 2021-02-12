@@ -1905,9 +1905,39 @@ At the moment dekorate is using 3 branches in parallel and two major versions ar
 ### Branches
 
 - master (active development, pull requests should point here)
-- 2.0.x  (not released yet)
-- 1.0.x  (bug fixes, only)
-- 0.15.x (old branch, former cuting edge branch)
+- 2.0.x  (current release)
+- 1.0.x  (old branch, bug fixes only)
+- 0.16.x (old branch, former cuting edge branch)
+
+### What changes in 2.0.0
+
+Most of the changes that went in 2.0.0 are internal and in most cases users should have no issues upgrading to 2.0.0.
+Contributors and everyone that uses dekorate as a framework, should read carefully.
+
+- Halkyon, Service Catalog and Application CRD modules are removed.
+- dekorate-deps has been removed.
+- Internal components renamed to be more descriptive.
+- The CRD generator is still present but soon will be moved to the `kubernetes-client`.
+
+#### Removal of dekorate-deps.
+
+This module was a shadowed uberjar that contained all dekorate dependencies:
+
+- kubernetes-client
+- jackson
+- snakeyaml
+- commons-compress
+
+The purpose of the module was to shadow the packages of these libraries and avoid potential conflict with consuming projects.
+The downside the jar had, was that it added a layer of complexity in the development of the project and dublicated a lot of classes, too.
+
+#### Internal components renamed
+
+The most noteworthy cases of renaming:
+
+- Generator -> ConfigurationGenerator
+- Handler -> ManifestGenerator
+
 
 ### Pull request guidelines
 
@@ -1918,7 +1948,7 @@ All pull requests should target the `master` branch and from there things are ba
 The current release branches are:
 
 - 2.0.x  (current)
-- 1.0.x  (stable, bug fixes only)
+- 1.0.x  (stable but old, bug fixes only)
 - 0.15.x (maintainance mode)
 
 ## Frequently asked questions
