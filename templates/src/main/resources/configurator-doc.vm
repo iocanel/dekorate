@@ -1,3 +1,18 @@
+##
+## First pass: collect package names
+##
+#set ($map = {})
+#foreach ($m in ${model.values()})
+#set ($pkg = $m.getPackageName().split("\."))
+#set ($key = $pkg[2])
+#set ($ignore = $map.put($key, $m))
+#end
+##
+## Print Package Heading
+##
+#foreach ($entry in $map.entrySet())
+** $entry.key
+#end
 | Configurator | Target | Description |
 |-
 #foreach ($m in ${model.values()})
@@ -24,8 +39,8 @@
 #end
 #end
 ## Inherited configurators will have no comments/description (not retained in the jar) so we can use description to filter them!
-## #if (!$description.isEmpty())
+#if (!$description.isEmpty())
 | ${m.name} | $target | $description |
-## #end
+#end
 #end
 #end

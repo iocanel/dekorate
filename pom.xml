@@ -94,7 +94,6 @@
 
   <modules>
     <module>templates</module>
-    <module>doc</module>
     <module>core</module>
     <module>frameworks</module>
     <module>annotations</module>
