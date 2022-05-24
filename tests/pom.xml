@@ -20,7 +20,6 @@
       <module>feat-216-annotationless-yml</module>
       <module>feat-243-spring-boot-with-webflux</module>
       <module>feat-279-image-pull-secrets</module>
-      <module>feat-347-thorntail-annotationless</module>
       <module>issue-130-empty-generic-java-project</module>
       <module>issue-222-manifest-not-generated-when-using-spring-starter</module>
       <module>issue-331-annotation-combined-with-properties</module>
@@ -81,4 +80,12 @@
       <module>issue-983-tests-inject-in-super-class</module>
     </modules>
 
+    <profiles>
+      <profile>
+        <id>with-thorntail</id>
+        <modules>
+          <module>feat-347-thorntail-annotationless</module>
+        </modules>
+      </profile>
+    </profiles>
 </project>

@@ -15,7 +15,16 @@
   <modules>
     <module>spring-boot</module>
     <module>jaxrs</module>
-    <module>thorntail</module>
     <module>nodejs</module>
   </modules>
+
+  <profiles>
+    <profile>
+      <id>with-thorntail</id>
+      <modules>
+        <module>thorntail</module>
+      </modules>
+    </profile>
+  </profiles>
+
 </project>
